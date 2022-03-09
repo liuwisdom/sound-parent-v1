@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisdom.soundservice.dao.GroupMapper">
+  <resultMap id="BaseResultMap" type="com.wisdom.sound.pojo.Group">
+    <id column="group_id" jdbcType="VARCHAR" property="groupId" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="group_code" jdbcType="VARCHAR" property="groupCode" />
+    <result column="group_parentid" jdbcType="VARCHAR" property="groupParentid" />
+    <result column="group_state" jdbcType="VARCHAR" property="groupState" />
+    <result column="group_creater" jdbcType="VARCHAR" property="groupCreater" />
+    <result column="group_creattime" jdbcType="VARCHAR" property="groupCreattime" />
+    <result column="group_editer" jdbcType="VARCHAR" property="groupEditer" />
+    <result column="group_edittime" jdbcType="VARCHAR" property="groupEdittime" />
+    <result column="group_description" jdbcType="VARCHAR" property="groupDescription" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    group_id, group_name, group_code, group_parentid, group_state, group_creater, group_creattime, 
+    group_editer, group_edittime, group_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from group
+    where group_id = #{groupId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByExample" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from group
+    where group_name = #{groupName,jdbcType=VARCHAR}
+  </select>
+  <select id="findAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sgroup
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from group
+    where group_id = #{groupId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisdom.sound.pojo.Group">
+    insert into group (group_id, group_name, group_code, 
+      group_parentid, group_state, group_creater, 
+      group_creattime, group_editer, group_edittime, 
+      group_description)
+    values (#{groupId,jdbcType=VARCHAR}, #{groupName,jdbcType=VARCHAR}, #{groupCode,jdbcType=VARCHAR}, 
+      #{groupParentid,jdbcType=VARCHAR}, #{groupState,jdbcType=VARCHAR}, #{groupCreater,jdbcType=VARCHAR}, 
+      #{groupCreattime,jdbcType=VARCHAR}, #{groupEditer,jdbcType=VARCHAR}, #{groupEdittime,jdbcType=VARCHAR}, 
+      #{groupDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisdom.sound.pojo.Group">
+    insert into group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="groupName != null">
+        group_name,
+      </if>
+      <if test="groupCode != null">
+        group_code,
+      </if>
+      <if test="groupParentid != null">
+        group_parentid,
+      </if>
+      <if test="groupState != null">
+        group_state,
+      </if>
+      <if test="groupCreater != null">
+        group_creater,
+      </if>
+      <if test="groupCreattime != null">
+        group_creattime,
+      </if>
+      <if test="groupEditer != null">
+        group_editer,
+      </if>
+      <if test="groupEdittime != null">
+        group_edittime,
+      </if>
+      <if test="groupDescription != null">
+        group_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupCode != null">
+        #{groupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="groupParentid != null">
+        #{groupParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupState != null">
+        #{groupState,jdbcType=VARCHAR},
+      </if>
+      <if test="groupCreater != null">
+        #{groupCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="groupCreattime != null">
+        #{groupCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="groupEditer != null">
+        #{groupEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="groupEdittime != null">
+        #{groupEdittime,jdbcType=VARCHAR},
+      </if>
+      <if test="groupDescription != null">
+        #{groupDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisdom.sound.pojo.Group">
+    update group
+    <set>
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupCode != null">
+        group_code = #{groupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="groupParentid != null">
+        group_parentid = #{groupParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="groupState != null">
+        group_state = #{groupState,jdbcType=VARCHAR},
+      </if>
+      <if test="groupCreater != null">
+        group_creater = #{groupCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="groupCreattime != null">
+        group_creattime = #{groupCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="groupEditer != null">
+        group_editer = #{groupEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="groupEdittime != null">
+        group_edittime = #{groupEdittime,jdbcType=VARCHAR},
+      </if>
+      <if test="groupDescription != null">
+        group_description = #{groupDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where group_id = #{groupId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisdom.sound.pojo.Group">
+    update group
+    set group_name = #{groupName,jdbcType=VARCHAR},
+      group_code = #{groupCode,jdbcType=VARCHAR},
+      group_parentid = #{groupParentid,jdbcType=VARCHAR},
+      group_state = #{groupState,jdbcType=VARCHAR},
+      group_creater = #{groupCreater,jdbcType=VARCHAR},
+      group_creattime = #{groupCreattime,jdbcType=VARCHAR},
+      group_editer = #{groupEditer,jdbcType=VARCHAR},
+      group_edittime = #{groupEdittime,jdbcType=VARCHAR},
+      group_description = #{groupDescription,jdbcType=VARCHAR}
+    where group_id = #{groupId,jdbcType=VARCHAR}
+  </update>
+</mapper>

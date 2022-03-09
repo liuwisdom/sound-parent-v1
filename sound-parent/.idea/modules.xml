@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/sound-api/sound-api.iml" filepath="$PROJECT_DIR$/sound-api/sound-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sound-parent.iml" filepath="$PROJECT_DIR$/sound-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sound-service/sound-service.iml" filepath="$PROJECT_DIR$/sound-service/sound-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sound-web/sound-web.iml" filepath="$PROJECT_DIR$/sound-web/sound-web.iml" />
+    </modules>
+  </component>
+</project>

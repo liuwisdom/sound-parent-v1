@@ -1,0 +1,140 @@
+package com.wisdom.soundweb.controller;
+import java.util.List;
+
+import com.wisdom.sound.entity.PageResult;
+import com.wisdom.sound.entity.Result;
+import com.wisdom.sound.pojo.Group;
+import com.wisdom.util.numutil.UUIDutil;
+import com.wisdom.util.numutil.dateUtil;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.wisdom.sound.service.GroupService;
+
+
+/**
+ * controller
+ * @author Administrator
+ *
+ */
+@Controller
+@RequestMapping("group")
+public class GroupController {
+
+	@DubboReference
+	private GroupService GroupServiceImpl;
+	
+	/**
+	 * 返回全部列表
+	 * @return
+	 */
+	@RequestMapping("/findAll")
+	@ResponseBody
+	public List<Group> findAll(){
+		System.out.println("jinlkiale");
+		System.out.println(GroupServiceImpl.findAll());
+		return GroupServiceImpl.findAll();
+	}
+
+	@RequestMapping("/test")
+	public Group test(){
+		return GroupServiceImpl.test();
+	}
+	@RequestMapping("/togroup")
+	public String togroup(){
+		System.out.println("dddddddddddddddddd");
+		return "/admin/group";
+	}
+	@RequestMapping("/tohome")
+	public String tohome(){
+		System.out.println("rrrrrrrrrrrrrrrr");
+		return "/admin/home";
+	}
+
+	/**
+	 * 返回全部列表
+	 * @return
+	 */
+	@RequestMapping("/findPage")
+	public PageResult findPage(int page, int rows){
+		return GroupServiceImpl.findPage(page, rows);
+	}
+	
+	/**
+	 * 增加
+	 * @param group
+	 * @return
+	 */
+	@RequestMapping("/add")
+	public Result add(@RequestBody Group group){
+		try {
+			group.setGroupId(UUIDutil.getUUID());
+			group.setGroupCreattime(dateUtil.getDate());
+
+			GroupServiceImpl.add(group);
+			return new Result(true, "增加成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Result(false, "增加失败");
+		}
+	}
+	
+	/**
+	 * 修改
+	 * @param group
+	 * @return
+	 */
+	@RequestMapping("/update")
+	public Result update(@RequestBody Group group){
+		try {
+			GroupServiceImpl.update(group);
+			return new Result(true, "修改成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Result(false, "修改失败");
+		}
+	}	
+	
+	/**
+	 * 获取实体
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/findOne")
+	public Group findOne(String  id){
+		return GroupServiceImpl.findOne(id);
+	}
+	
+	/**
+	 * 批量删除
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping("/delete")
+	public Result delete(String [] ids){
+		try {
+			GroupServiceImpl.delete(ids);
+			return new Result(true, "删除成功"); 
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new Result(false, "删除失败");
+		}
+	}
+	
+		/**
+	 * 查询+分页
+	 * @param
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+//	@RequestMapping("/search")
+//	public PageResult search(@RequestBody Group group, int page, int rows  ){
+//		return GroupServiceImpl.findPage(group, page, rows);
+//	}
+	
+}

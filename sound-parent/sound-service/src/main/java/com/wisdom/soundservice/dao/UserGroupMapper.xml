@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisdom.soundservice.dao.UserGroupMapper">
+  <resultMap id="BaseResultMap" type="com.wisdom.sound.pojo.UserGroup">
+    <id column="user_group_id" jdbcType="VARCHAR" property="userGroupId" />
+    <result column="user_group_userid" jdbcType="VARCHAR" property="userGroupUserid" />
+    <result column="user_group_groupid" jdbcType="VARCHAR" property="userGroupGroupid" />
+    <result column="user_group_creater" jdbcType="VARCHAR" property="userGroupCreater" />
+    <result column="user_group_creattime" jdbcType="VARCHAR" property="userGroupCreattime" />
+    <result column="user_group_editer" jdbcType="VARCHAR" property="userGroupEditer" />
+    <result column="user_group_edittime" jdbcType="VARCHAR" property="userGroupEdittime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_group_id, user_group_userid, user_group_groupid, user_group_creater, user_group_creattime, 
+    user_group_editer, user_group_edittime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_group
+    where user_group_id = #{userGroupId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_group
+    where user_group_id = #{userGroupId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisdom.sound.pojo.UserGroup">
+    insert into user_group (user_group_id, user_group_userid, user_group_groupid, 
+      user_group_creater, user_group_creattime, user_group_editer, 
+      user_group_edittime)
+    values (#{userGroupId,jdbcType=VARCHAR}, #{userGroupUserid,jdbcType=VARCHAR}, #{userGroupGroupid,jdbcType=VARCHAR}, 
+      #{userGroupCreater,jdbcType=VARCHAR}, #{userGroupCreattime,jdbcType=VARCHAR}, #{userGroupEditer,jdbcType=VARCHAR}, 
+      #{userGroupEdittime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisdom.sound.pojo.UserGroup">
+    insert into user_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userGroupId != null">
+        user_group_id,
+      </if>
+      <if test="userGroupUserid != null">
+        user_group_userid,
+      </if>
+      <if test="userGroupGroupid != null">
+        user_group_groupid,
+      </if>
+      <if test="userGroupCreater != null">
+        user_group_creater,
+      </if>
+      <if test="userGroupCreattime != null">
+        user_group_creattime,
+      </if>
+      <if test="userGroupEditer != null">
+        user_group_editer,
+      </if>
+      <if test="userGroupEdittime != null">
+        user_group_edittime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userGroupId != null">
+        #{userGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="userGroupUserid != null">
+        #{userGroupUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="userGroupGroupid != null">
+        #{userGroupGroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="userGroupCreater != null">
+        #{userGroupCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="userGroupCreattime != null">
+        #{userGroupCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="userGroupEditer != null">
+        #{userGroupEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="userGroupEdittime != null">
+        #{userGroupEdittime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisdom.sound.pojo.UserGroup">
+    update user_group
+    <set>
+      <if test="userGroupUserid != null">
+        user_group_userid = #{userGroupUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="userGroupGroupid != null">
+        user_group_groupid = #{userGroupGroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="userGroupCreater != null">
+        user_group_creater = #{userGroupCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="userGroupCreattime != null">
+        user_group_creattime = #{userGroupCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="userGroupEditer != null">
+        user_group_editer = #{userGroupEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="userGroupEdittime != null">
+        user_group_edittime = #{userGroupEdittime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_group_id = #{userGroupId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisdom.sound.pojo.UserGroup">
+    update user_group
+    set user_group_userid = #{userGroupUserid,jdbcType=VARCHAR},
+      user_group_groupid = #{userGroupGroupid,jdbcType=VARCHAR},
+      user_group_creater = #{userGroupCreater,jdbcType=VARCHAR},
+      user_group_creattime = #{userGroupCreattime,jdbcType=VARCHAR},
+      user_group_editer = #{userGroupEditer,jdbcType=VARCHAR},
+      user_group_edittime = #{userGroupEdittime,jdbcType=VARCHAR}
+    where user_group_id = #{userGroupId,jdbcType=VARCHAR}
+  </update>
+</mapper>

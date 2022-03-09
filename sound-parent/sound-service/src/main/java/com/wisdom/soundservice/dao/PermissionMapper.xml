@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisdom.soundservice.dao.PermissionMapper">
+  <resultMap id="BaseResultMap" type="com.wisdom.sound.pojo.Permission">
+    <id column="permission_id" jdbcType="VARCHAR" property="permissionId" />
+    <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
+    <result column="permission_code" jdbcType="VARCHAR" property="permissionCode" />
+    <result column="permission_parentid" jdbcType="VARCHAR" property="permissionParentid" />
+    <result column="permission_url" jdbcType="VARCHAR" property="permissionUrl" />
+    <result column="permission_state" jdbcType="VARCHAR" property="permissionState" />
+    <result column="permission_creater" jdbcType="VARCHAR" property="permissionCreater" />
+    <result column="permission_creattime" jdbcType="VARCHAR" property="permissionCreattime" />
+    <result column="permission_editer" jdbcType="VARCHAR" property="permissionEditer" />
+    <result column="permission_edittime" jdbcType="VARCHAR" property="permissionEdittime" />
+    <result column="permission_description" jdbcType="VARCHAR" property="permissionDescription" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    permission_id, permission_name, permission_code, permission_parentid, permission_url, 
+    permission_state, permission_creater, permission_creattime, permission_editer, permission_edittime, 
+    permission_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from permission
+    where permission_id = #{permissionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from permission
+    where permission_id = #{permissionId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisdom.sound.pojo.Permission">
+    insert into permission (permission_id, permission_name, permission_code, 
+      permission_parentid, permission_url, permission_state, 
+      permission_creater, permission_creattime, 
+      permission_editer, permission_edittime, permission_description
+      )
+    values (#{permissionId,jdbcType=VARCHAR}, #{permissionName,jdbcType=VARCHAR}, #{permissionCode,jdbcType=VARCHAR}, 
+      #{permissionParentid,jdbcType=VARCHAR}, #{permissionUrl,jdbcType=VARCHAR}, #{permissionState,jdbcType=VARCHAR}, 
+      #{permissionCreater,jdbcType=VARCHAR}, #{permissionCreattime,jdbcType=VARCHAR}, 
+      #{permissionEditer,jdbcType=VARCHAR}, #{permissionEdittime,jdbcType=VARCHAR}, #{permissionDescription,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisdom.sound.pojo.Permission">
+    insert into permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="permissionId != null">
+        permission_id,
+      </if>
+      <if test="permissionName != null">
+        permission_name,
+      </if>
+      <if test="permissionCode != null">
+        permission_code,
+      </if>
+      <if test="permissionParentid != null">
+        permission_parentid,
+      </if>
+      <if test="permissionUrl != null">
+        permission_url,
+      </if>
+      <if test="permissionState != null">
+        permission_state,
+      </if>
+      <if test="permissionCreater != null">
+        permission_creater,
+      </if>
+      <if test="permissionCreattime != null">
+        permission_creattime,
+      </if>
+      <if test="permissionEditer != null">
+        permission_editer,
+      </if>
+      <if test="permissionEdittime != null">
+        permission_edittime,
+      </if>
+      <if test="permissionDescription != null">
+        permission_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="permissionId != null">
+        #{permissionId,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionName != null">
+        #{permissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionCode != null">
+        #{permissionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionParentid != null">
+        #{permissionParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionUrl != null">
+        #{permissionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionState != null">
+        #{permissionState,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionCreater != null">
+        #{permissionCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionCreattime != null">
+        #{permissionCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionEditer != null">
+        #{permissionEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionEdittime != null">
+        #{permissionEdittime,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionDescription != null">
+        #{permissionDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisdom.sound.pojo.Permission">
+    update permission
+    <set>
+      <if test="permissionName != null">
+        permission_name = #{permissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionCode != null">
+        permission_code = #{permissionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionParentid != null">
+        permission_parentid = #{permissionParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionUrl != null">
+        permission_url = #{permissionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionState != null">
+        permission_state = #{permissionState,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionCreater != null">
+        permission_creater = #{permissionCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionCreattime != null">
+        permission_creattime = #{permissionCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionEditer != null">
+        permission_editer = #{permissionEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionEdittime != null">
+        permission_edittime = #{permissionEdittime,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionDescription != null">
+        permission_description = #{permissionDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where permission_id = #{permissionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisdom.sound.pojo.Permission">
+    update permission
+    set permission_name = #{permissionName,jdbcType=VARCHAR},
+      permission_code = #{permissionCode,jdbcType=VARCHAR},
+      permission_parentid = #{permissionParentid,jdbcType=VARCHAR},
+      permission_url = #{permissionUrl,jdbcType=VARCHAR},
+      permission_state = #{permissionState,jdbcType=VARCHAR},
+      permission_creater = #{permissionCreater,jdbcType=VARCHAR},
+      permission_creattime = #{permissionCreattime,jdbcType=VARCHAR},
+      permission_editer = #{permissionEditer,jdbcType=VARCHAR},
+      permission_edittime = #{permissionEdittime,jdbcType=VARCHAR},
+      permission_description = #{permissionDescription,jdbcType=VARCHAR}
+    where permission_id = #{permissionId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisdom.soundservice.dao.RoleGroupMapper">
+  <resultMap id="BaseResultMap" type="com.wisdom.sound.pojo.RoleGroup">
+    <id column="role_group_id" jdbcType="VARCHAR" property="roleGroupId" />
+    <result column="role_group_groupid" jdbcType="VARCHAR" property="roleGroupGroupid" />
+    <result column="role_group_roleid" jdbcType="VARCHAR" property="roleGroupRoleid" />
+    <result column="role_group_creater" jdbcType="VARCHAR" property="roleGroupCreater" />
+    <result column="role_group_creattime" jdbcType="VARCHAR" property="roleGroupCreattime" />
+    <result column="role_group_editer" jdbcType="VARCHAR" property="roleGroupEditer" />
+    <result column="role_group_edittime" jdbcType="VARCHAR" property="roleGroupEdittime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_group_id, role_group_groupid, role_group_roleid, role_group_creater, role_group_creattime, 
+    role_group_editer, role_group_edittime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role_group
+    where role_group_id = #{roleGroupId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from role_group
+    where role_group_id = #{roleGroupId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisdom.sound.pojo.RoleGroup">
+    insert into role_group (role_group_id, role_group_groupid, role_group_roleid, 
+      role_group_creater, role_group_creattime, role_group_editer, 
+      role_group_edittime)
+    values (#{roleGroupId,jdbcType=VARCHAR}, #{roleGroupGroupid,jdbcType=VARCHAR}, #{roleGroupRoleid,jdbcType=VARCHAR}, 
+      #{roleGroupCreater,jdbcType=VARCHAR}, #{roleGroupCreattime,jdbcType=VARCHAR}, #{roleGroupEditer,jdbcType=VARCHAR}, 
+      #{roleGroupEdittime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisdom.sound.pojo.RoleGroup">
+    insert into role_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleGroupId != null">
+        role_group_id,
+      </if>
+      <if test="roleGroupGroupid != null">
+        role_group_groupid,
+      </if>
+      <if test="roleGroupRoleid != null">
+        role_group_roleid,
+      </if>
+      <if test="roleGroupCreater != null">
+        role_group_creater,
+      </if>
+      <if test="roleGroupCreattime != null">
+        role_group_creattime,
+      </if>
+      <if test="roleGroupEditer != null">
+        role_group_editer,
+      </if>
+      <if test="roleGroupEdittime != null">
+        role_group_edittime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleGroupId != null">
+        #{roleGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleGroupGroupid != null">
+        #{roleGroupGroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleGroupRoleid != null">
+        #{roleGroupRoleid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleGroupCreater != null">
+        #{roleGroupCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="roleGroupCreattime != null">
+        #{roleGroupCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="roleGroupEditer != null">
+        #{roleGroupEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="roleGroupEdittime != null">
+        #{roleGroupEdittime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisdom.sound.pojo.RoleGroup">
+    update role_group
+    <set>
+      <if test="roleGroupGroupid != null">
+        role_group_groupid = #{roleGroupGroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleGroupRoleid != null">
+        role_group_roleid = #{roleGroupRoleid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleGroupCreater != null">
+        role_group_creater = #{roleGroupCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="roleGroupCreattime != null">
+        role_group_creattime = #{roleGroupCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="roleGroupEditer != null">
+        role_group_editer = #{roleGroupEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="roleGroupEdittime != null">
+        role_group_edittime = #{roleGroupEdittime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_group_id = #{roleGroupId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisdom.sound.pojo.RoleGroup">
+    update role_group
+    set role_group_groupid = #{roleGroupGroupid,jdbcType=VARCHAR},
+      role_group_roleid = #{roleGroupRoleid,jdbcType=VARCHAR},
+      role_group_creater = #{roleGroupCreater,jdbcType=VARCHAR},
+      role_group_creattime = #{roleGroupCreattime,jdbcType=VARCHAR},
+      role_group_editer = #{roleGroupEditer,jdbcType=VARCHAR},
+      role_group_edittime = #{roleGroupEdittime,jdbcType=VARCHAR}
+    where role_group_id = #{roleGroupId,jdbcType=VARCHAR}
+  </update>
+</mapper>

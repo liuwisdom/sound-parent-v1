@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisdom.soundservice.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.wisdom.sound.pojo.User">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
+    <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_invitation_code" jdbcType="VARCHAR" property="userInvitationCode" />
+    <result column="user_phone_code" jdbcType="VARCHAR" property="userPhoneCode" />
+    <result column="user_weixin" jdbcType="VARCHAR" property="userWeixin" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, user_account, user_password, user_type, user_phone, user_invitation_code, 
+    user_phone_code, user_weixin
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisdom.sound.pojo.User">
+    insert into user (user_id, user_account, user_password, 
+      user_type, user_phone, user_invitation_code, 
+      user_phone_code, user_weixin)
+    values (#{userId,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{userInvitationCode,jdbcType=VARCHAR}, 
+      #{userPhoneCode,jdbcType=VARCHAR}, #{userWeixin,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisdom.sound.pojo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userAccount != null">
+        user_account,
+      </if>
+      <if test="userPassword != null">
+        user_password,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userInvitationCode != null">
+        user_invitation_code,
+      </if>
+      <if test="userPhoneCode != null">
+        user_phone_code,
+      </if>
+      <if test="userWeixin != null">
+        user_weixin,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccount != null">
+        #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userInvitationCode != null">
+        #{userInvitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoneCode != null">
+        #{userPhoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userWeixin != null">
+        #{userWeixin,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisdom.sound.pojo.User">
+    update user
+    <set>
+      <if test="userAccount != null">
+        user_account = #{userAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userInvitationCode != null">
+        user_invitation_code = #{userInvitationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhoneCode != null">
+        user_phone_code = #{userPhoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userWeixin != null">
+        user_weixin = #{userWeixin,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisdom.sound.pojo.User">
+    update user
+    set user_account = #{userAccount,jdbcType=VARCHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_invitation_code = #{userInvitationCode,jdbcType=VARCHAR},
+      user_phone_code = #{userPhoneCode,jdbcType=VARCHAR},
+      user_weixin = #{userWeixin,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

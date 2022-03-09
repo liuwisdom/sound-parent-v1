@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisdom.soundservice.dao.ResourceMapper">
+  <resultMap id="BaseResultMap" type="com.wisdom.sound.pojo.Resource">
+    <id column="resource_id" jdbcType="INTEGER" property="resourceId" />
+    <result column="resource_name" jdbcType="VARCHAR" property="resourceName" />
+    <result column="resource_code" jdbcType="VARCHAR" property="resourceCode" />
+    <result column="resource_parentid" jdbcType="VARCHAR" property="resourceParentid" />
+    <result column="resource_url" jdbcType="VARCHAR" property="resourceUrl" />
+    <result column="resource_state" jdbcType="VARCHAR" property="resourceState" />
+    <result column="resource_creater" jdbcType="VARCHAR" property="resourceCreater" />
+    <result column="resource_creattime" jdbcType="VARCHAR" property="resourceCreattime" />
+    <result column="resource_editer" jdbcType="VARCHAR" property="resourceEditer" />
+    <result column="resource_edittime" jdbcType="VARCHAR" property="resourceEdittime" />
+    <result column="resource_description" jdbcType="VARCHAR" property="resourceDescription" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    resource_id, resource_name, resource_code, resource_parentid, resource_url, resource_state, 
+    resource_creater, resource_creattime, resource_editer, resource_edittime, resource_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from resource
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from resource
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wisdom.sound.pojo.Resource">
+    insert into resource (resource_id, resource_name, resource_code, 
+      resource_parentid, resource_url, resource_state, 
+      resource_creater, resource_creattime, resource_editer, 
+      resource_edittime, resource_description)
+    values (#{resourceId,jdbcType=INTEGER}, #{resourceName,jdbcType=VARCHAR}, #{resourceCode,jdbcType=VARCHAR}, 
+      #{resourceParentid,jdbcType=VARCHAR}, #{resourceUrl,jdbcType=VARCHAR}, #{resourceState,jdbcType=VARCHAR}, 
+      #{resourceCreater,jdbcType=VARCHAR}, #{resourceCreattime,jdbcType=VARCHAR}, #{resourceEditer,jdbcType=VARCHAR}, 
+      #{resourceEdittime,jdbcType=VARCHAR}, #{resourceDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisdom.sound.pojo.Resource">
+    insert into resource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="resourceId != null">
+        resource_id,
+      </if>
+      <if test="resourceName != null">
+        resource_name,
+      </if>
+      <if test="resourceCode != null">
+        resource_code,
+      </if>
+      <if test="resourceParentid != null">
+        resource_parentid,
+      </if>
+      <if test="resourceUrl != null">
+        resource_url,
+      </if>
+      <if test="resourceState != null">
+        resource_state,
+      </if>
+      <if test="resourceCreater != null">
+        resource_creater,
+      </if>
+      <if test="resourceCreattime != null">
+        resource_creattime,
+      </if>
+      <if test="resourceEditer != null">
+        resource_editer,
+      </if>
+      <if test="resourceEdittime != null">
+        resource_edittime,
+      </if>
+      <if test="resourceDescription != null">
+        resource_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="resourceId != null">
+        #{resourceId,jdbcType=INTEGER},
+      </if>
+      <if test="resourceName != null">
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceCode != null">
+        #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceParentid != null">
+        #{resourceParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null">
+        #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceState != null">
+        #{resourceState,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceCreater != null">
+        #{resourceCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceCreattime != null">
+        #{resourceCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceEditer != null">
+        #{resourceEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceEdittime != null">
+        #{resourceEdittime,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceDescription != null">
+        #{resourceDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisdom.sound.pojo.Resource">
+    update resource
+    <set>
+      <if test="resourceName != null">
+        resource_name = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceCode != null">
+        resource_code = #{resourceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceParentid != null">
+        resource_parentid = #{resourceParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceUrl != null">
+        resource_url = #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceState != null">
+        resource_state = #{resourceState,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceCreater != null">
+        resource_creater = #{resourceCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceCreattime != null">
+        resource_creattime = #{resourceCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceEditer != null">
+        resource_editer = #{resourceEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceEdittime != null">
+        resource_edittime = #{resourceEdittime,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceDescription != null">
+        resource_description = #{resourceDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisdom.sound.pojo.Resource">
+    update resource
+    set resource_name = #{resourceName,jdbcType=VARCHAR},
+      resource_code = #{resourceCode,jdbcType=VARCHAR},
+      resource_parentid = #{resourceParentid,jdbcType=VARCHAR},
+      resource_url = #{resourceUrl,jdbcType=VARCHAR},
+      resource_state = #{resourceState,jdbcType=VARCHAR},
+      resource_creater = #{resourceCreater,jdbcType=VARCHAR},
+      resource_creattime = #{resourceCreattime,jdbcType=VARCHAR},
+      resource_editer = #{resourceEditer,jdbcType=VARCHAR},
+      resource_edittime = #{resourceEdittime,jdbcType=VARCHAR},
+      resource_description = #{resourceDescription,jdbcType=VARCHAR}
+    where resource_id = #{resourceId,jdbcType=INTEGER}
+  </update>
+</mapper>

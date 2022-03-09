@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisdom.soundservice.dao.RolePermissionMapper">
+  <resultMap id="BaseResultMap" type="com.wisdom.sound.pojo.RolePermission">
+    <id column="role_permission_id" jdbcType="VARCHAR" property="rolePermissionId" />
+    <result column="role_permission_roleid" jdbcType="VARCHAR" property="rolePermissionRoleid" />
+    <result column="role_permission_permissionid" jdbcType="VARCHAR" property="rolePermissionPermissionid" />
+    <result column="role_permission_creater" jdbcType="VARCHAR" property="rolePermissionCreater" />
+    <result column="role_permission_creattime" jdbcType="VARCHAR" property="rolePermissionCreattime" />
+    <result column="role_permission_editer" jdbcType="VARCHAR" property="rolePermissionEditer" />
+    <result column="role_permission_edittime" jdbcType="VARCHAR" property="rolePermissionEdittime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_permission_id, role_permission_roleid, role_permission_permissionid, role_permission_creater, 
+    role_permission_creattime, role_permission_editer, role_permission_edittime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role_permission
+    where role_permission_id = #{rolePermissionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from role_permission
+    where role_permission_id = #{rolePermissionId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisdom.sound.pojo.RolePermission">
+    insert into role_permission (role_permission_id, role_permission_roleid, 
+      role_permission_permissionid, role_permission_creater, 
+      role_permission_creattime, role_permission_editer, 
+      role_permission_edittime)
+    values (#{rolePermissionId,jdbcType=VARCHAR}, #{rolePermissionRoleid,jdbcType=VARCHAR}, 
+      #{rolePermissionPermissionid,jdbcType=VARCHAR}, #{rolePermissionCreater,jdbcType=VARCHAR}, 
+      #{rolePermissionCreattime,jdbcType=VARCHAR}, #{rolePermissionEditer,jdbcType=VARCHAR}, 
+      #{rolePermissionEdittime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisdom.sound.pojo.RolePermission">
+    insert into role_permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rolePermissionId != null">
+        role_permission_id,
+      </if>
+      <if test="rolePermissionRoleid != null">
+        role_permission_roleid,
+      </if>
+      <if test="rolePermissionPermissionid != null">
+        role_permission_permissionid,
+      </if>
+      <if test="rolePermissionCreater != null">
+        role_permission_creater,
+      </if>
+      <if test="rolePermissionCreattime != null">
+        role_permission_creattime,
+      </if>
+      <if test="rolePermissionEditer != null">
+        role_permission_editer,
+      </if>
+      <if test="rolePermissionEdittime != null">
+        role_permission_edittime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rolePermissionId != null">
+        #{rolePermissionId,jdbcType=VARCHAR},
+      </if>
+      <if test="rolePermissionRoleid != null">
+        #{rolePermissionRoleid,jdbcType=VARCHAR},
+      </if>
+      <if test="rolePermissionPermissionid != null">
+        #{rolePermissionPermissionid,jdbcType=VARCHAR},
+      </if>
+      <if test="rolePermissionCreater != null">
+        #{rolePermissionCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="rolePermissionCreattime != null">
+        #{rolePermissionCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="rolePermissionEditer != null">
+        #{rolePermissionEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="rolePermissionEdittime != null">
+        #{rolePermissionEdittime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisdom.sound.pojo.RolePermission">
+    update role_permission
+    <set>
+      <if test="rolePermissionRoleid != null">
+        role_permission_roleid = #{rolePermissionRoleid,jdbcType=VARCHAR},
+      </if>
+      <if test="rolePermissionPermissionid != null">
+        role_permission_permissionid = #{rolePermissionPermissionid,jdbcType=VARCHAR},
+      </if>
+      <if test="rolePermissionCreater != null">
+        role_permission_creater = #{rolePermissionCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="rolePermissionCreattime != null">
+        role_permission_creattime = #{rolePermissionCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="rolePermissionEditer != null">
+        role_permission_editer = #{rolePermissionEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="rolePermissionEdittime != null">
+        role_permission_edittime = #{rolePermissionEdittime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_permission_id = #{rolePermissionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisdom.sound.pojo.RolePermission">
+    update role_permission
+    set role_permission_roleid = #{rolePermissionRoleid,jdbcType=VARCHAR},
+      role_permission_permissionid = #{rolePermissionPermissionid,jdbcType=VARCHAR},
+      role_permission_creater = #{rolePermissionCreater,jdbcType=VARCHAR},
+      role_permission_creattime = #{rolePermissionCreattime,jdbcType=VARCHAR},
+      role_permission_editer = #{rolePermissionEditer,jdbcType=VARCHAR},
+      role_permission_edittime = #{rolePermissionEdittime,jdbcType=VARCHAR}
+    where role_permission_id = #{rolePermissionId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wisdom.soundservice.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.wisdom.sound.pojo.Role">
+    <id column="ROLE_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="ROLE_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="ROLE_code" jdbcType="VARCHAR" property="roleCode" />
+    <result column="ROLE_parentid" jdbcType="VARCHAR" property="roleParentid" />
+    <result column="ROLE_state" jdbcType="VARCHAR" property="roleState" />
+    <result column="ROLE_creater" jdbcType="VARCHAR" property="roleCreater" />
+    <result column="ROLE_creattime" jdbcType="VARCHAR" property="roleCreattime" />
+    <result column="ROLE_editer" jdbcType="VARCHAR" property="roleEditer" />
+    <result column="ROLE_edittime" jdbcType="VARCHAR" property="roleEdittime" />
+    <result column="ROLE_description" jdbcType="VARCHAR" property="roleDescription" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ROLE_id, ROLE_name, ROLE_code, ROLE_parentid, ROLE_state, ROLE_creater, ROLE_creattime, 
+    ROLE_editer, ROLE_edittime, ROLE_description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where ROLE_id = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from role
+    where ROLE_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wisdom.sound.pojo.Role">
+    insert into role (ROLE_id, ROLE_name, ROLE_code, 
+      ROLE_parentid, ROLE_state, ROLE_creater, 
+      ROLE_creattime, ROLE_editer, ROLE_edittime, 
+      ROLE_description)
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR}, 
+      #{roleParentid,jdbcType=VARCHAR}, #{roleState,jdbcType=VARCHAR}, #{roleCreater,jdbcType=VARCHAR}, 
+      #{roleCreattime,jdbcType=VARCHAR}, #{roleEditer,jdbcType=VARCHAR}, #{roleEdittime,jdbcType=VARCHAR}, 
+      #{roleDescription,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wisdom.sound.pojo.Role">
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        ROLE_id,
+      </if>
+      <if test="roleName != null">
+        ROLE_name,
+      </if>
+      <if test="roleCode != null">
+        ROLE_code,
+      </if>
+      <if test="roleParentid != null">
+        ROLE_parentid,
+      </if>
+      <if test="roleState != null">
+        ROLE_state,
+      </if>
+      <if test="roleCreater != null">
+        ROLE_creater,
+      </if>
+      <if test="roleCreattime != null">
+        ROLE_creattime,
+      </if>
+      <if test="roleEditer != null">
+        ROLE_editer,
+      </if>
+      <if test="roleEdittime != null">
+        ROLE_edittime,
+      </if>
+      <if test="roleDescription != null">
+        ROLE_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleParentid != null">
+        #{roleParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleState != null">
+        #{roleState,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreater != null">
+        #{roleCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreattime != null">
+        #{roleCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="roleEditer != null">
+        #{roleEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="roleEdittime != null">
+        #{roleEdittime,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDescription != null">
+        #{roleDescription,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wisdom.sound.pojo.Role">
+    update role
+    <set>
+      <if test="roleName != null">
+        ROLE_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        ROLE_code = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleParentid != null">
+        ROLE_parentid = #{roleParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleState != null">
+        ROLE_state = #{roleState,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreater != null">
+        ROLE_creater = #{roleCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreattime != null">
+        ROLE_creattime = #{roleCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="roleEditer != null">
+        ROLE_editer = #{roleEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="roleEdittime != null">
+        ROLE_edittime = #{roleEdittime,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDescription != null">
+        ROLE_description = #{roleDescription,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ROLE_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wisdom.sound.pojo.Role">
+    update role
+    set ROLE_name = #{roleName,jdbcType=VARCHAR},
+      ROLE_code = #{roleCode,jdbcType=VARCHAR},
+      ROLE_parentid = #{roleParentid,jdbcType=VARCHAR},
+      ROLE_state = #{roleState,jdbcType=VARCHAR},
+      ROLE_creater = #{roleCreater,jdbcType=VARCHAR},
+      ROLE_creattime = #{roleCreattime,jdbcType=VARCHAR},
+      ROLE_editer = #{roleEditer,jdbcType=VARCHAR},
+      ROLE_edittime = #{roleEdittime,jdbcType=VARCHAR},
+      ROLE_description = #{roleDescription,jdbcType=VARCHAR}
+    where ROLE_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+</mapper>
