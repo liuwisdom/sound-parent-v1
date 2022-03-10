@@ -22,13 +22,20 @@
 	<script src="../../plugins/angularjs/pagination.js"></script>
 	<!--分页插件-->
 	<!--sound 项目 组 base-controlleer controller service base base-pagenation-->
-	<script src="../../js/base.js"></script>
+	<script src="../../js/base_pagination.js"></script>
 	<script src="../../js/base_pagination.js"></script>
 	<script src="../../js/controller/baseController.js"></script>
 	<script src="../../js/controller/groupController.js"></script>
 	<script src="../../js/service/groupService.js"></script>
 	<!--sound 项目 组 base-controlleer controller service base base-pagenation-->
-    
+
+	<!-- 引入select2的相关的css和js -->
+	<script type="text/javascript" src="../../plugins/select2/angular-select2.js">  </script>
+	<link rel="stylesheet" href="../../plugins/select2/select2.css" />
+	<link rel="stylesheet" href="../../plugins/select2/select2-bootstrap.css" />
+	<script src="../../plugins/select2/select2.min.js" type="text/javascript"></script>
+
+	<!-- 引入select2的相关的css和js -->
 </head>
 <body class="hold-transition skin-red sidebar-mini"  ng-controller="groupController" >
   <!-- .box-body -->
@@ -45,8 +52,8 @@
                             <div class="pull-left">
                                 <div class="form-group form-inline">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ><i class="fa fa-file-o"></i> 新建</button>
-                                        <button type="button" class="btn btn-default" title="删除" ><i class="fa fa-trash-o"></i> 删除</button>           
+                                        <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ng-click="findAll()"><i class="fa fa-file-o"></i> 新建</button>
+                                        <button type="button" class="btn btn-default" title="删除"  ng-click="dele()"><i class="fa fa-trash-o"></i> 删除</button>
                                         <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                                     </div>
                                 </div>
@@ -59,7 +66,7 @@
                             <!--工具栏/-->
 
 			                  <!--数据列表-->
-			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable" ng-init="findAll()">
+			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
 			                      <thead>
 			                          <tr>
 			                              <th class="" style="padding-right:0px">
@@ -79,20 +86,21 @@
 			                          </tr>
 			                      </thead>
 			                      <tbody>
-			                          <tr ng-repeat="group in list">
-			                              <td><input  type="checkbox" ng-click="updateSelection($event,group.groupId)"/></td>
-				                          <td>{{group.groupId}}</td>
-									      <td>{{group.groupName}}</td>
-		                                  <td>{{group.groupCode}}</td>
-		                                  <td>{{group.groupParentid}}</td>
-		                                  <td>{{group.groupState}}</td>
-		                                  <td>{{group.groupCreater}}</td>
-		                                  <td>{{group.groupCreattime}}</td>
-		                                  <td>{{group.groupEditer}}</td>
-		                                  <td>{{group.groupEditer}}</td>
-		                                  <td>{{group.groupEditer}}</td>
-		                                  <td class="groupDescription">
-		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"  >修改</button>                                           
+			                          <tr ng-repeat="sgroup in list">
+			                              <td><input  type="checkbox" ng-click="updateSelection($event,sgroup.groupId)"/></td>
+				                          <td>{{sgroup.groupId}}</td>
+									      <td>{{sgroup.groupName}}</td>
+		                                  <td>{{sgroup.groupCode}}</td>
+		                                  <!--<td>{{sgroup.groupParentid}}</td>-->
+		                                  <td>{{jsonToString(sgroup.groupParentid,'text')}}</td>
+		                                  <td>{{sgroup.groupState}}</td>
+		                                  <td>{{sgroup.groupCreater}}</td>
+		                                  <td>{{sgroup.groupCreattime}}</td>
+		                                  <td>{{sgroup.groupEditer}}</td>
+		                                  <td>{{sgroup.groupEdittime}}</td>
+		                                  <td>{{sgroup.groupDescription}}</td>
+		                                  <td class="text-center">
+		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" ng-click="findOne(sgroup.groupId)" >修改</button>
 		                                  </td>
 			                          </tr>
 
@@ -132,11 +140,33 @@
 		      	</tr>
                 <tr>
                     <td>父组ID</td>
-                    <td><input  class="form-control" placeholder="父组ID" ng-model="entity.groupParentid">  </td>
+                    <td>
+						<!--<input  class="form-control" placeholder="父组ID" ng-model="entity.groupParentid">  -->
+						<!--
+		      				ng-model:绑定下拉列表的id
+		      				select2-model:绑定下拉列表的id和value
+		      				config:代表的是数据的来源
+		      			 -->
+						<input select2  select2-model="entity.groupParentid" config="groupList" multiple placeholder="支持多选哦" class="form-control" type="text"/>
+					</td>
                 </tr>
                 <tr>
                     <td>组状态</td>
-                    <td><input  class="form-control" placeholder="组状态" ng-model="entity.groupState">  </td>
+                    <!--<td><input  class="form-control" placeholder="组状态" ng-model="entity.groupState">  </td> -->
+					<td>
+						<div class="form-group">
+							<label  class="radio-inline">
+								<input type="radio" class="col-sm-4" name="level" ng-model="entity.groupState" value="1"/>  启用
+							</label>
+							<label class="radio-inline">
+								<input type="radio" class="col-sm-4" name="level" ng-model="entity.groupState"value="2" />  废弃
+							</label>
+							<label  class="radio-inline">
+								<input type="radio" class="col-sm-4" name="level" ng-model="entity.groupState" value="3"/>  临时
+							</label>
+						</div>
+					</td>
+
                 </tr>
                 <tr>
                     <td>创建人</td>
@@ -158,10 +188,7 @@
                     <td>组描述</td>
                     <td><input  class="form-control" placeholder="组描述"ng-model="entity.groupDescription">  </td>
                 </tr>
-                <tr>
-                    <td>组ID</td>
-                    <td><input  type="hidden" class="form-control" placeholder="组ID"ng-model="entity.groupId">  </td>
-                </tr>
+
 
             </table>
 		</div>

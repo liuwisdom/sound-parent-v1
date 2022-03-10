@@ -18,7 +18,7 @@ public interface GroupMapper {
 
     int updateByPrimaryKey(Group record);
 
-    List<Group> selectByExample(Object o);
+    List<Group> selectByExample(Group record);
 
     List<Group> findAll( );
 }

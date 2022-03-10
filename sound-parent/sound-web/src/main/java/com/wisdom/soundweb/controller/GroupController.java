@@ -8,10 +8,7 @@ import com.wisdom.util.numutil.UUIDutil;
 import com.wisdom.util.numutil.dateUtil;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.wisdom.sound.service.GroupService;
 
@@ -60,7 +57,9 @@ public class GroupController {
 	 * @return
 	 */
 	@RequestMapping("/findPage")
+	@ResponseBody
 	public PageResult findPage(int page, int rows){
+		System.out.println("22222222222222");
 		return GroupServiceImpl.findPage(page, rows);
 	}
 	
@@ -70,6 +69,7 @@ public class GroupController {
 	 * @return
 	 */
 	@RequestMapping("/add")
+	@ResponseBody
 	public Result add(@RequestBody Group group){
 		try {
 			group.setGroupId(UUIDutil.getUUID());
@@ -89,6 +89,7 @@ public class GroupController {
 	 * @return
 	 */
 	@RequestMapping("/update")
+	@ResponseBody
 	public Result update(@RequestBody Group group){
 		try {
 			GroupServiceImpl.update(group);
@@ -105,8 +106,9 @@ public class GroupController {
 	 * @return
 	 */
 	@RequestMapping("/findOne")
-	public Group findOne(String  id){
-		return GroupServiceImpl.findOne(id);
+	@ResponseBody
+	public Group findOne(String  groupId){
+		return GroupServiceImpl.findOne(groupId);
 	}
 	
 	/**
@@ -115,6 +117,7 @@ public class GroupController {
 	 * @return
 	 */
 	@RequestMapping("/delete")
+	@ResponseBody
 	public Result delete(String [] ids){
 		try {
 			GroupServiceImpl.delete(ids);
@@ -132,9 +135,11 @@ public class GroupController {
 	 * @param rows
 	 * @return
 	 */
-//	@RequestMapping("/search")
-//	public PageResult search(@RequestBody Group group, int page, int rows  ){
-//		return GroupServiceImpl.findPage(group, page, rows);
-//	}
+	@RequestMapping("/search")
+	@ResponseBody
+	public PageResult search(@RequestBody Group group, int page, int rows  ){
+		System.out.println("44444444444444");
+		return GroupServiceImpl.findPage(group, page, rows);
+	}
 	
 }

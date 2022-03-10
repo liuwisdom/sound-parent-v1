@@ -28,3 +28,6 @@ pagehelper:
 mybatis:
   mapper-locations: classpath:com/wisdom/soundservice/dao/*.xml
   type-aliases-package: com.wisdom.weixinapp.sound.pojo
+  # spring boot集成mybatis的方式打印sql
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

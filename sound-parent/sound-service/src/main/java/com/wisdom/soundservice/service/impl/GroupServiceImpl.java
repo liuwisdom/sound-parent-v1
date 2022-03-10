@@ -56,7 +56,7 @@ public class GroupServiceImpl implements GroupService {
 	 */
 	@Override
 	public void update(Group group){
-		groupMapper.updateByPrimaryKey(group);
+		groupMapper.updateByPrimaryKeySelective(group);
 	}	
 	
 	/**
@@ -91,9 +91,9 @@ public class GroupServiceImpl implements GroupService {
 	
 		@Override
 	public PageResult findPage(Group group, int pageNum, int pageSize) {
-		PageHelper.startPage(pageNum, pageSize);
-		
-		return null;
+	  	    PageHelper.startPage(pageNum, pageSize);
+			List<Group> groups = groupMapper.selectByExample(group);
+			return new PageResult(groups.size(),groups);
 	}
 	
 }
