@@ -1,5 +1,7 @@
 package com.wisdom.sound.service;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.pojo.Group;
@@ -16,7 +18,8 @@ public interface GroupService {
 	 * @return
 	 */
 	public List<Group> findAll();
-	
+
+	public List<HashMap<String,String>> selectForSelect2();
 	
 	/**
 	 * 返回分页列表

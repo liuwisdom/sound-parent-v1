@@ -5,6 +5,11 @@ app.service('groupService',function($http){
 	this.findAll=function(){
 		return $http.get('/group/findAll');
 	}
+
+	//读取列表数据绑定到表单中
+	this.selectForSelect2=function(){
+		return $http.get('/group/groupList');
+	}
 	//分页 
 	this.findPage=function(page,rows){
 		return $http.get('/group/findPage?page='+page+'&rows='+rows);

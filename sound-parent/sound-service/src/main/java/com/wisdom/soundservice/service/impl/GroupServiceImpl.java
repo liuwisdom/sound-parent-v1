@@ -1,5 +1,7 @@
 package com.wisdom.soundservice.service.impl;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.wisdom.soundservice.dao.GroupMapper;
 import com.wisdom.sound.entity.PageResult;
@@ -30,6 +32,11 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public List<Group> findAll() {
 		return groupMapper.findAll();
+	}
+
+	@Override
+	public List<HashMap<String,String>> selectForSelect2() {
+		return groupMapper.selectForSelect2();
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package com.wisdom.soundweb.controller;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.entity.Result;
@@ -32,23 +34,29 @@ public class GroupController {
 	@RequestMapping("/findAll")
 	@ResponseBody
 	public List<Group> findAll(){
-		System.out.println("jinlkiale");
+
 		System.out.println(GroupServiceImpl.findAll());
 		return GroupServiceImpl.findAll();
 	}
+	@RequestMapping("/groupList")
+	@ResponseBody
+	public  List<HashMap<String,String>> groupList(){
 
-	@RequestMapping("/test")
-	public Group test(){
-		return GroupServiceImpl.test();
+		List<HashMap<String,String>> groups = GroupServiceImpl.selectForSelect2();
+		return groups;
 	}
+
+//	@RequestMapping("/test")
+//	public Group test(){
+//		return GroupServiceImpl.test();
+//	}
+
 	@RequestMapping("/togroup")
 	public String togroup(){
-		System.out.println("dddddddddddddddddd");
 		return "/admin/group";
 	}
 	@RequestMapping("/tohome")
 	public String tohome(){
-		System.out.println("rrrrrrrrrrrrrrrr");
 		return "/admin/home";
 	}
 
@@ -59,7 +67,7 @@ public class GroupController {
 	@RequestMapping("/findPage")
 	@ResponseBody
 	public PageResult findPage(int page, int rows){
-		System.out.println("22222222222222");
+
 		return GroupServiceImpl.findPage(page, rows);
 	}
 	
@@ -102,7 +110,7 @@ public class GroupController {
 	
 	/**
 	 * 获取实体
-	 * @param id
+	 * @param
 	 * @return
 	 */
 	@RequestMapping("/findOne")
@@ -138,7 +146,7 @@ public class GroupController {
 	@RequestMapping("/search")
 	@ResponseBody
 	public PageResult search(@RequestBody Group group, int page, int rows  ){
-		System.out.println("44444444444444");
+
 		return GroupServiceImpl.findPage(group, page, rows);
 	}
 	

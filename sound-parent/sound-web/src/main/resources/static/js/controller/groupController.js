@@ -2,10 +2,12 @@
 app.controller('groupController' ,function($scope,$controller   ,groupService){	
 	
 	$controller('baseController',{$scope:$scope});//继承
-	$scope.groupList={data:[]};//父组id列表
+
+
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
-		groupService.findAll().success(
+		$scope.groupList={data:[]};//父组id列表
+		groupService.selectForSelect2().success(
 			function(response){
 				$scope.groupList={data:response};
 			}			
@@ -26,17 +28,21 @@ app.controller('groupController' ,function($scope,$controller   ,groupService){
 	$scope.findOne=function(id){				
 		groupService.findOne(id).success(
 			function(response){
-				$scope.entity= response;					
+				$scope.entity= response;
+				$scope.entity.groupParentid=JSON.parse($scope.entity.groupParentid);
+
 			}
 		);				
 	}
 	
 	//保存 
 	$scope.save=function(){				
-		var serviceObject;//服务层对象  				
+		var serviceObject;//服务层对象
+		$scope.entity.groupParentid=JSON.stringify($scope.entity.groupParentid);
 		if($scope.entity.groupId!=null){//如果有ID
 			serviceObject=groupService.update( $scope.entity ); //修改  
 		}else{
+
 			serviceObject=groupService.add( $scope.entity  );//增加 
 		}				
 		serviceObject.success(

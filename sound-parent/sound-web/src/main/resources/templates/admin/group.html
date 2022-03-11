@@ -23,7 +23,6 @@
 	<!--分页插件-->
 	<!--sound 项目 组 base-controlleer controller service base base-pagenation-->
 	<script src="../../js/base_pagination.js"></script>
-	<script src="../../js/base_pagination.js"></script>
 	<script src="../../js/controller/baseController.js"></script>
 	<script src="../../js/controller/groupController.js"></script>
 	<script src="../../js/service/groupService.js"></script>
@@ -93,7 +92,7 @@
 		                                  <td>{{sgroup.groupCode}}</td>
 		                                  <!--<td>{{sgroup.groupParentid}}</td>-->
 		                                  <td>{{jsonToString(sgroup.groupParentid,'text')}}</td>
-		                                  <td>{{sgroup.groupState}}</td>
+		                                  <td>{{stateToZh(sgroup.groupState)}}</td>
 		                                  <td>{{sgroup.groupCreater}}</td>
 		                                  <td>{{sgroup.groupCreattime}}</td>
 		                                  <td>{{sgroup.groupEditer}}</td>

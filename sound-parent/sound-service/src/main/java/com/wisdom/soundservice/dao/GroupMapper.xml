@@ -24,10 +24,15 @@
     where group_id = #{groupId,jdbcType=VARCHAR}
   </select>
 
+  <select id="selectForSelect2"  resultType="java.util.HashMap">
+    select
+     group_id as id, group_name as text
+    from sgroup
+  </select>
+
   <select id="selectByExample" parameterType="com.wisdom.sound.pojo.Group" resultMap="BaseResultMap">
     select
-    group_id, group_name as text, group_code, group_parentid, group_state, group_creater, group_creattime,
-    group_editer, group_edittime, group_description
+    <include refid="Base_Column_List" />
     from sgroup
 <where>
     <if test="groupName != null">

@@ -29,5 +29,33 @@ app.controller('baseController' ,function($scope){
             $scope.selectIds.splice(idx, 1);//删除 
 		}
 	}
+
+// 优化列表内父级id显示效果
+	$scope.jsonToString=function(jsonString,key){
+
+		var json= JSON.parse(jsonString);
+		var value="";
+
+		for(var i=0;i<json.length;i++){
+			if(i>0){
+				value+=",";
+			}
+			value +=json[i][key];
+		}
+
+		return value;
+	}
+	//优化数据列表内状态的显示由数字转成字符串以便通俗易懂
+	$scope.stateToZh=function (state) {
+		if (state=='1') {
+			return '启用'
+		}
+		if (state=='2') {
+			return '禁用'
+		}
+		if (state=='3') {
+			return '临时'
+		}
+	}
 	
 });	
