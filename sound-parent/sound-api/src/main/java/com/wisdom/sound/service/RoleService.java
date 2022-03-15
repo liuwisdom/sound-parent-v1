@@ -1,4 +1,5 @@
 package com.wisdom.sound.service;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -59,5 +60,12 @@ public interface RoleService {
 	 * @return
 	 */
 	public PageResult findPage(Role role, int pageNum, int pageSize);
-	
+	/**
+	 * 功能描述 : 返回所有角色
+	 * 参数 :[] :
+	 * @return java.util.List<com.wisdom.sound.pojo.Role>
+	 * @date  2022/3/15
+	 * @author  liuwisdom
+	 */
+    List<HashMap<String, String>> findForSelect2();
 }

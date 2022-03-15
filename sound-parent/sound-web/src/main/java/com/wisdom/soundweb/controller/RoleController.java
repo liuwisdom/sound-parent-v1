@@ -1,13 +1,15 @@
 package com.wisdom.soundweb.controller;
+import java.util.HashMap;
 import java.util.List;
 
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.entity.Result;
 import com.wisdom.sound.pojo.Role;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import com.alibaba.dubbo.config.annotation.Reference;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wisdom.sound.service.RoleService;
 
@@ -17,20 +19,34 @@ import com.wisdom.sound.service.RoleService;
  * @author Administrator
  *
  */
-@RestController
+@Controller
 @RequestMapping("/role")
 public class RoleController {
 
-	@Reference
+	@DubboReference
 	private RoleService roleService;
-	
+
+	@RequestMapping("/torole")
+	public String torole(){
+		return "/admin/role";
+	}
 	/**
 	 * 返回全部列表
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/findAll")
 	public List<Role> findAll(){
 		return roleService.findAll();
+	}
+	/**
+	 * 返回全部列表
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/findForSelect2")
+	public List<HashMap<String, String>> findForSelect2(){
+		return roleService.findForSelect2();
 	}
 	
 	
@@ -38,6 +54,7 @@ public class RoleController {
 	 * 返回全部列表
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/findPage")
 	public PageResult findPage(int page, int rows){
 		return roleService.findPage(page, rows);
@@ -48,6 +65,7 @@ public class RoleController {
 	 * @param role
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/add")
 	public Result add(@RequestBody Role role){
 		try {
@@ -64,6 +82,7 @@ public class RoleController {
 	 * @param role
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/update")
 	public Result update(@RequestBody Role role){
 		try {
@@ -80,6 +99,7 @@ public class RoleController {
 	 * @param id
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/findOne")
 	public Role findOne(String id){
 		return roleService.findOne(id);		
@@ -90,6 +110,7 @@ public class RoleController {
 	 * @param ids
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/delete")
 	public Result delete(String [] ids){
 		try {
@@ -108,6 +129,7 @@ public class RoleController {
 	 * @param rows
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody Role role, int page, int rows  ){
 		return roleService.findPage(role, page, rows);		

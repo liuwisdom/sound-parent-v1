@@ -4,6 +4,8 @@ import java.util.List;
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.entity.Result;
 import com.wisdom.sound.pojo.Permission;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,13 +19,17 @@ import com.wisdom.sound.service.PermissionService;
  * @author Administrator
  *
  */
-@RestController
+@Controller
 @RequestMapping("/permission")
 public class PermissionController {
 
-	@Reference
+	@DubboReference
 	private PermissionService permissionService;
-	
+
+	@RequestMapping("/topermission")
+	public String topermission(){
+		return "/admin/permission";
+	}
 	/**
 	 * 返回全部列表
 	 * @return

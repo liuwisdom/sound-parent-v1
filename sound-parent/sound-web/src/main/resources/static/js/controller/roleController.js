@@ -10,7 +10,18 @@ app.controller('roleController' ,function($scope,$controller   ,roleService){
 				$scope.list=response;
 			}			
 		);
-	}    
+	}
+	$scope.roleList={data:[]}
+	//读取j角色数据绑定到多选列表中
+	$scope.findForSelect2=function(){
+		//第二次点击新建时会出现上次的记录 这里做一下处理 清空entity
+		$scope.entity={};
+		roleService.findForSelect2().success(
+			function(response){
+				$scope.roleList={data:response};
+			}
+		);
+	}
 	
 	//分页
 	$scope.findPage=function(page,rows){			
@@ -26,18 +37,20 @@ app.controller('roleController' ,function($scope,$controller   ,roleService){
 	$scope.findOne=function(id){				
 		roleService.findOne(id).success(
 			function(response){
-				$scope.entity= response;					
+				$scope.entity=response
+				$scope.entity.roleParentid=JSON.parse(response.roleParentid);
 			}
 		);				
 	}
 	
 	//保存 
 	$scope.save=function(){				
-		var serviceObject;//服务层对象  				
-		if($scope.entity.id!=null){//如果有ID
-			serviceObject=roleService.update( $scope.entity ); //修改  
+		var serviceObject;//服务层对象
+		$scope.entity.roleParentid=JSON.stringify($scope.entity.roleParentid);
+		if($scope.entity.roleId!=null){//如果有ID
+			serviceObject=roleService.update($scope.entity); //修改
 		}else{
-			serviceObject=roleService.add( $scope.entity  );//增加 
+			serviceObject=roleService.add($scope.entity);//增加
 		}				
 		serviceObject.success(
 			function(response){

@@ -23,6 +23,53 @@
     from role
     where ROLE_id = #{roleId,jdbcType=VARCHAR}
   </select>
+  <select id="findAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from role
+  </select>
+  <select id="selectByExample" parameterType="com.wisdom.sound.pojo.Role" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from role
+    <where>
+      <if test="roleId != null">
+        ROLE_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        ROLE_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        ROLE_code = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleParentid != null">
+        ROLE_parentid = #{roleParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleState != null">
+        ROLE_state = #{roleState,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreater != null">
+        ROLE_creater = #{roleCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCreattime != null">
+        ROLE_creattime = #{roleCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="roleEditer != null">
+        ROLE_editer = #{roleEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="roleEdittime != null">
+        ROLE_edittime = #{roleEdittime,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDescription != null">
+        ROLE_description = #{roleDescription,jdbcType=VARCHAR},
+      </if>
+    </where>
+  </select>
+  <select id="findForSelect2"  resultType="java.util.HashMap">
+    select
+    ROLE_id as id ,ROLE_name as text
+    from role
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from role
     where ROLE_id = #{roleId,jdbcType=VARCHAR}

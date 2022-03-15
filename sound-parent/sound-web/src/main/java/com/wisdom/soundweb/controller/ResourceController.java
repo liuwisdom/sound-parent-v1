@@ -4,6 +4,8 @@ import java.util.List;
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.entity.Result;
 import com.wisdom.sound.pojo.Resource;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +19,17 @@ import com.wisdom.sound.service.ResourceService;
  * @author Administrator
  *
  */
-@RestController
+@Controller
 @RequestMapping("/resource")
 public class ResourceController {
 
-	@Reference
+	@DubboReference
 	private ResourceService resourceService;
+
+	@RequestMapping("/toresource")
+	public String toresource(){
+		return "/admin/resource";
+	}
 	
 	/**
 	 * 返回全部列表
