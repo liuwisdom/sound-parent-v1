@@ -3,7 +3,7 @@ package com.wisdom.sound.pojo;
 import java.io.Serializable;
 
 public class Resource implements Serializable {
-    private Integer resourceId;
+    private String resourceId;
 
     private String resourceName;
 
@@ -25,11 +25,11 @@ public class Resource implements Serializable {
 
     private String resourceDescription;
 
-    public Integer getResourceId() {
+    public String getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(Integer resourceId) {
+    public void setResourceId(String resourceId) {
         this.resourceId = resourceId;
     }
 

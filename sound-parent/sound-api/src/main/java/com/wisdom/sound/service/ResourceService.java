@@ -1,4 +1,5 @@
 package com.wisdom.sound.service;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -59,5 +60,6 @@ public interface ResourceService {
 	 * @return
 	 */
 	public PageResult findPage(Resource resource, int pageNum, int pageSize);
-	
+
+	List<HashMap<String, String>> findForSelect2();
 }

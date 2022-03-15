@@ -34,7 +34,8 @@ app.controller('roleController' ,function($scope,$controller   ,roleService){
 	}
 	
 	//查询实体 
-	$scope.findOne=function(id){				
+	$scope.findOne=function(id){
+		$scope.findForSelect2();
 		roleService.findOne(id).success(
 			function(response){
 				$scope.entity=response

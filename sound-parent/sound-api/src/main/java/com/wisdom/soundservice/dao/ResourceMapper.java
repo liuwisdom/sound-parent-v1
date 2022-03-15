@@ -3,6 +3,7 @@ package com.wisdom.soundservice.dao;
 import com.wisdom.sound.pojo.Resource;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.HashMap;
 import java.util.List;
 @Mapper
 public interface ResourceMapper {
@@ -18,5 +19,9 @@ public interface ResourceMapper {
 
     int updateByPrimaryKey(Resource record);
 
-    List<Resource> selectByExample(Object o);
+    List<Resource> selectByExample(Resource record);
+
+    List<Resource> findAll();
+
+    List<HashMap<String, String>> findForSelect2();
 }

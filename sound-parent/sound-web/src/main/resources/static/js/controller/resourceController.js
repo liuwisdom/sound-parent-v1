@@ -10,7 +10,18 @@ app.controller('resourceController' ,function($scope,$controller   ,resourceServ
 				$scope.list=response;
 			}			
 		);
-	}    
+	}
+	//定义下拉列表
+	$scope.resourceList={data:[]};
+	$scope.findForSelect2=function (){
+		$scope.entity={};
+		resourceService.findForSelect2().success(
+			function(response){
+				$scope.resourceList={data:response};
+			}
+		);
+	}
+
 	
 	//分页
 	$scope.findPage=function(page,rows){			
@@ -23,18 +34,22 @@ app.controller('resourceController' ,function($scope,$controller   ,resourceServ
 	}
 	
 	//查询实体 
-	$scope.findOne=function(id){				
+	$scope.findOne=function(id){
+		$scope.findForSelect2();
 		resourceService.findOne(id).success(
 			function(response){
-				$scope.entity= response;					
+				$scope.entity= response;
+				$scope.entity.resourceParentid=JSON.parse(response.resourceParentid)
+
 			}
 		);				
 	}
 	
 	//保存 
 	$scope.save=function(){				
-		var serviceObject;//服务层对象  				
-		if($scope.entity.id!=null){//如果有ID
+		var serviceObject;//服务层对象
+		$scope.entity.resourceParentid=JSON.stringify($scope.entity.resourceParentid);
+		if($scope.entity.resourceId!=null){//如果有ID
 			serviceObject=resourceService.update( $scope.entity ); //修改  
 		}else{
 			serviceObject=resourceService.add( $scope.entity  );//增加 

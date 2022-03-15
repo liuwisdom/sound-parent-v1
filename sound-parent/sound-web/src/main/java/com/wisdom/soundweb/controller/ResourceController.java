@@ -1,4 +1,5 @@
 package com.wisdom.soundweb.controller;
+import java.util.HashMap;
 import java.util.List;
 
 import com.wisdom.sound.entity.PageResult;
@@ -8,6 +9,7 @@ import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
 
@@ -35,9 +37,15 @@ public class ResourceController {
 	 * 返回全部列表
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/findAll")
 	public List<Resource> findAll(){
 		return resourceService.findAll();
+	}
+	@ResponseBody
+	@RequestMapping("/findForSelect2")
+	public List<HashMap<String,String>> findForSelect2(){
+		return resourceService.findForSelect2();
 	}
 	
 	
@@ -45,6 +53,7 @@ public class ResourceController {
 	 * 返回全部列表
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/findPage")
 	public PageResult findPage(int page, int rows){
 		return resourceService.findPage(page, rows);
@@ -55,6 +64,7 @@ public class ResourceController {
 	 * @param resource
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/add")
 	public Result add(@RequestBody Resource resource){
 		try {
@@ -71,6 +81,7 @@ public class ResourceController {
 	 * @param resource
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/update")
 	public Result update(@RequestBody Resource resource){
 		try {
@@ -87,6 +98,7 @@ public class ResourceController {
 	 * @param id
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/findOne")
 	public Resource findOne(String  id){
 		return resourceService.findOne(id);		
@@ -97,6 +109,7 @@ public class ResourceController {
 	 * @param ids
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/delete")
 	public Result delete(String [] ids){
 		try {
@@ -115,6 +128,7 @@ public class ResourceController {
 	 * @param rows
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody Resource resource, int page, int rows  ){
 		return resourceService.findPage(resource, page, rows);		

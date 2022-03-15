@@ -1,9 +1,12 @@
 package com.wisdom.soundservice.service.impl;
+import java.util.HashMap;
 import java.util.List;
 
 import com.wisdom.soundservice.dao.ResourceMapper;
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.pojo.Resource;
+import com.wisdom.util.numutil.UUIDutil;
+import com.wisdom.util.numutil.dateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
@@ -38,7 +41,7 @@ public class ResourceServiceImpl implements ResourceService {
 	@Override
 	public PageResult findPage(int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);		
-		Page<Resource> page=   (Page<Resource>) resourceMapper.selectByExample(null);
+		Page<Resource> page=   (Page<Resource>) resourceMapper.findAll();
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
@@ -47,7 +50,10 @@ public class ResourceServiceImpl implements ResourceService {
 	 */
 	@Override
 	public void add(Resource resource) {
-		resourceMapper.insert(resource);		
+		resource.setResourceId(UUIDutil.getUUID());
+		resource.setResourceCreattime(dateUtil.getDate());
+		resource.setResourceEdittime(dateUtil.getDate());
+		resourceMapper.insert(resource);
 	}
 
 	
@@ -56,7 +62,7 @@ public class ResourceServiceImpl implements ResourceService {
 	 */
 	@Override
 	public void update(Resource resource){
-		resourceMapper.updateByPrimaryKey(resource);
+		resourceMapper.updateByPrimaryKeySelective(resource);
 	}	
 	
 	/**
@@ -83,8 +89,13 @@ public class ResourceServiceImpl implements ResourceService {
 		@Override
 	public PageResult findPage(Resource resource, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
-		
-		return null;
+		Page<Resource> page=   (Page<Resource>) resourceMapper.selectByExample(resource);
+		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+	@Override
+	public List<HashMap<String, String>> findForSelect2() {
+		return resourceMapper.findForSelect2();
+	}
+
 }
