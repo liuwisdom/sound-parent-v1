@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html  ng-app="sound">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>组管理</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../plugins/angularjs/pagination.css">
+    <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!--angularjs相关-->
+    <script src="../../plugins/angularjs/angular.min.js"></script>
+    <script src="../../plugins/angularjs/angular-route.min.js"></script>
+    <script src="../../plugins/angularjs/angular-animate.min.js"></script>
+    <!--angularjs相关-->
+
+    <!--分页插件-->
+    <script src="../../plugins/angularjs/pagination.js"></script>
+    <!--分页插件-->
+    <!--sound 项目 组 base-controlleer controller service base base-pagenation-->
+    <script src="../../js/base_pagination.js"></script>
+    <script src="../../js/controller/baseController.js"></script>
+    <script src="../../js/controller/groupController.js"></script>
+    <script src="../../js/service/groupService.js"></script>
+    <script src="../../js/controller/userController.js"></script>
+    <script src="../../js/service/userService.js"></script>
+    <!--sound 项目 组 base-controlleer controller service base base-pagenation-->
+
+
+</head>
+<body class="hold-transition skin-red sidebar-mini"  ng-controller="userController" >
+<!-- .box-body -->
+<div class="box-header with-border">
+    <h3 class="box-title">用户-组管理</h3>
+</div>
+
+<div class="box-body">
+
+    <!-- 数据表格 -->
+    <div class="table-box">
+
+        <!--工具栏-->
+        <!--<div class="pull-left">-->
+            <!--<div class="form-group form-inline">-->
+                <!--<div class="btn-group">-->
+                    <!--<button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ng-click="findAll()"><i class="fa fa-file-o"></i> 新建</button>-->
+                    <!--<button type="button" class="btn btn-default" title="删除"  ng-click="dele()"><i class="fa fa-trash-o"></i> 删除</button>-->
+                    <!--<button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="box-tools pull-right">
+            <div class="has-feedback">
+
+            </div>
+        </div>
+        <!--工具栏/-->
+
+        <!--数据列表-->
+        <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+            <thead>
+            <tr>
+                <!--<th class="" style="padding-right:0px">-->
+                    <!--<input id="selall" type="checkbox" class="icheckbox_square-blue">-->
+                <!--</th>-->
+                <th class="sorting_asc">用户ID</th>
+                <th class="sorting">用户名称</th>
+                <th class="sorting">手机号</th>
+                <th class="sorting">推荐码</th>
+                <th class="sorting">微信号</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in list">
+                <td>{{user.userId}}</td>
+                <td>{{user.userAccount}}</td>
+                <td>{{user.userPhone}}</td>
+                <td>{{user.userPhoneCode}}</td>
+                <td>{{user.userWeixin}}</td>
+                <td class="text-center">
+                    <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" ng-click="addGroup(user.userId)" >添加组</button>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+        <!--数据列表/-->
+
+
+    </div>
+    <!-- 数据表格 /-->
+
+    <!-- 数据表格 /-->
+    <!-- 分页 -->
+    <tm-pagination conf="paginationConf"></tm-pagination>
+
+</div>
+<!-- /.box-body -->
+
+
+<!-- 编辑窗口 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">用户-组编辑</h3>
+            </div>
+            <div class="table-box">
+
+                <!--工具栏-->
+
+                <div class="box-tools pull-right">
+                    <div class="has-feedback">
+
+                    </div>
+                </div>
+                <!--工具栏/-->
+
+                <!--数据列表-->
+                <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+                    <thead>
+                    <tr>
+                        <th class="" style="padding-right:0px">
+                            <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                        </th>
+                        <th class="sorting">用户组代码</th>
+                        <th class="sorting">用户组名称</th>
+                        <th class="sorting">父组ID</th>
+                        <th class="sorting">用户组状态</th>
+                        <th class="sorting">创建人</th>
+                        <th class="sorting">修改人</th>
+                        <th class="sorting">组说明</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="sgroup in grouplist">
+                        <td><input  type="checkbox" ng-click="updateSelection($event,sgroup.groupId)"/></td>
+                        <td>{{sgroup.groupCode}}</td>
+                        <td>{{sgroup.groupName}}</td>
+                        <td>{{jsonToString(sgroup.groupParentid,'text')}}</td>
+                        <td>{{stateToZh(sgroup.groupState)}}</td>
+                        <td>{{sgroup.groupCreater}}</td>
+                        <td>{{sgroup.groupEditer}}</td>
+                        <td>{{sgroup.groupDescription}}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <!--数据列表/-->
+            </div>
+            <!--<div class="modal-body">-->
+                <!--<table class="table table-bordered table-striped"  width="800px">-->
+                    <!--<tr>-->
+                        <!--<td>用户组名称</td>-->
+                        <!--<td><input  class="form-control" placeholder="用户组名称" ng-model="entity.groupName">  </td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>组代码</td>-->
+                        <!--<td><input  class="form-control" placeholder="组代码" ng-model="entity.groupCode">  </td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>父组ID</td>-->
+                        <!--<td>-->
+                            <!--&lt;!&ndash;<input  class="form-control" placeholder="父组ID" ng-model="entity.groupParentid">  &ndash;&gt;-->
+                            <!--&lt;!&ndash;-->
+                                  <!--ng-model:绑定下拉列表的id-->
+                                  <!--select2-model:绑定下拉列表的id和value-->
+                                  <!--config:代表的是数据的来源-->
+                               <!--&ndash;&gt;-->
+                            <!--<input select2  select2-model="entity.groupParentid" config="groupList" multiple placeholder="支持多选哦" class="form-control" type="text"/>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>组状态</td>-->
+                        <!--&lt;!&ndash;<td><input  class="form-control" placeholder="组状态" ng-model="entity.groupState">  </td> &ndash;&gt;-->
+                        <!--<td>-->
+                            <!--<div class="form-group">-->
+                                <!--<label  class="radio-inline">-->
+                                    <!--<input type="radio" class="col-sm-4" name="level" ng-model="entity.groupState" value="1"/>  启用-->
+                                <!--</label>-->
+                                <!--<label class="radio-inline">-->
+                                    <!--<input type="radio" class="col-sm-4" name="level" ng-model="entity.groupState"value="2" />  废弃-->
+                                <!--</label>-->
+                                <!--<label  class="radio-inline">-->
+                                    <!--<input type="radio" class="col-sm-4" name="level" ng-model="entity.groupState" value="3"/>  临时-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</td>-->
+
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>创建人</td>-->
+                        <!--<td><input  class="form-control" placeholder="创建人" ng-model="entity.groupCreater">  </td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>创建时间</td>-->
+                        <!--<td><input  class="form-control" placeholder="创建时间" ng-model="entity.groupCreattime">  </td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>修改人</td>-->
+                        <!--<td><input  class="form-control" placeholder="修改人" ng-model="entity.groupEditer">  </td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>修改时间</td>-->
+                        <!--<td><input  class="form-control" placeholder="修改时间"ng-model="entity.groupEdittime">  </td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>组描述</td>-->
+                        <!--<td><input  class="form-control" placeholder="组描述"ng-model="entity.groupDescription">  </td>-->
+                    <!--</tr>-->
+
+
+                <!--</table>-->
+            <!--</div>-->
+
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

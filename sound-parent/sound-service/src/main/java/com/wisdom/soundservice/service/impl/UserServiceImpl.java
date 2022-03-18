@@ -1,9 +1,14 @@
 package com.wisdom.soundservice.service.impl;
 import java.util.List;
 
+import com.wisdom.sound.pojo.UserGroup;
+import com.wisdom.soundservice.dao.UserGroupMapper;
 import com.wisdom.soundservice.dao.UserMapper;
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.pojo.User;
+import com.wisdom.util.numutil.UUIDutil;
+import com.wisdom.util.numutil.dateUtil;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
@@ -18,18 +23,21 @@ import com.wisdom.sound.service.UserService;
  * @author Administrator
  *
  */
-@Service
+@DubboService
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserMapper userMapper;
+
+	@Autowired
+	private UserGroupMapper userGroupMapper;
 	
 	/**
 	 * 查询全部
 	 */
 	@Override
 	public List<User> findAll() {
-		return userMapper.selectByExample(null);
+		return userMapper.findAll();
 	}
 
 	/**
@@ -38,7 +46,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public PageResult findPage(int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);		
-		Page<User> page=   (Page<User>) userMapper.selectByExample(null);
+		Page<User> page=   (Page<User>) userMapper.findAll();
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
@@ -56,7 +64,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public void update(User user){
-		userMapper.updateByPrimaryKey(user);
+		userMapper.updateByPrimaryKeySelective(user);
 	}	
 	
 	/**
@@ -80,11 +88,29 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	
-		@Override
+	@Override
 	public PageResult findPage(User user, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
-		
-		return null;
+		Page<User> page=   (Page<User>) userMapper.selectByExample(user);
+		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+    //循环插入user-group中间表
+	@Override
+	public void addUserGroup(String userid, String[] ids) {
+		for (String id:ids) {
+			UserGroup ug=new UserGroup();
+			ug.setUserGroupId(UUIDutil.getUUID());
+			ug.setUserGroupUserid(userid);
+			ug.setUserGroupGroupid(id);
+			ug.setUserGroupCreattime(dateUtil.getDate());
+			userGroupMapper.insert(ug);
+		}
+
+	}
+
+	@Override
+	public void deleteUserGroupByUserId(String userId) {
+		userGroupMapper.deleteUserGroupByUserId(userId);
+	}
+
 }

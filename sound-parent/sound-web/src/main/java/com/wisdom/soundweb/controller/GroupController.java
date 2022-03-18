@@ -34,8 +34,6 @@ public class GroupController {
 	@RequestMapping("/findAll")
 	@ResponseBody
 	public List<Group> findAll(){
-
-		System.out.println(GroupServiceImpl.findAll());
 		return GroupServiceImpl.findAll();
 	}
 	@RequestMapping("/groupList")
@@ -55,6 +53,7 @@ public class GroupController {
 	public String togroup(){
 		return "/admin/group";
 	}
+
 	@RequestMapping("/tohome")
 	public String tohome(){
 		return "/admin/home";

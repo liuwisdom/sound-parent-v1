@@ -18,5 +18,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    List<User> selectByExample(Object o);
+    List<User> selectByExample(User user);
+
+    List<User> findAll();
 }

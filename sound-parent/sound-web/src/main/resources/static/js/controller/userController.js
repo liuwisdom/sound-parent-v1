@@ -1,16 +1,26 @@
  //控制层 
-app.controller('userController' ,function($scope,$controller   ,userService){	
+app.controller('userController' ,function($scope,$controller   ,userService,groupService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
-    //读取列表数据绑定到表单中  
+    //读取用户列表数据绑定到表单中
 	$scope.findAll=function(){
 		userService.findAll().success(
 			function(response){
 				$scope.list=response;
 			}			
 		);
-	}    
+	}
+	//读取组列表数据绑定到表单中
+	$scope.addGroup=function(userid){
+		//暂存用户id
+		$scope.userId=userid;
+		groupService.findAll().success(
+			function(response){
+				$scope.grouplist=response;
+			}
+		);
+	}
 	
 	//分页
 	$scope.findPage=function(page,rows){			
@@ -33,18 +43,9 @@ app.controller('userController' ,function($scope,$controller   ,userService){
 	
 	//保存 
 	$scope.save=function(){				
-		var serviceObject;//服务层对象  				
-		if($scope.entity.id!=null){//如果有ID
-			serviceObject=userService.update( $scope.entity ); //修改  
-		}else{
-			serviceObject=userService.add( $scope.entity  );//增加 
-		}				
-		serviceObject.success(
+	userService.add( $scope.userId ,$scope.selectIds).success(
 			function(response){
 				if(response.success){
-					//重新查询 
-		        	$scope.reloadList();//重新加载
-				}else{
 					alert(response.message);
 				}
 			}		

@@ -57,5 +57,8 @@ public interface UserService {
 	 * @return
 	 */
 	public PageResult findPage(User user, int pageNum, int pageSize);
-	
+
+    void addUserGroup(String userid, String[] ids);
+
+	void deleteUserGroupByUserId(String userId);
 }

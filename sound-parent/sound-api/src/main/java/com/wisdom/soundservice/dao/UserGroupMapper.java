@@ -16,4 +16,6 @@ public interface UserGroupMapper {
     int updateByPrimaryKeySelective(UserGroup record);
 
     int updateByPrimaryKey(UserGroup record);
+
+    void deleteUserGroupByUserId(String userId);
 }

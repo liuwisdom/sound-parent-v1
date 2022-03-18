@@ -21,6 +21,42 @@
     from user
     where user_id = #{userId,jdbcType=VARCHAR}
   </select>
+
+  <select id="findAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+  </select>
+
+  <select id="selectByExample" parameterType="com.wisdom.sound.pojo.User" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+   <where>
+     <if test="userAccount != null">
+       user_account = #{userAccount,jdbcType=VARCHAR},
+     </if>
+     <if test="userPassword != null">
+       user_password = #{userPassword,jdbcType=VARCHAR},
+     </if>
+     <if test="userType != null">
+       user_type = #{userType,jdbcType=VARCHAR},
+     </if>
+     <if test="userPhone != null">
+       user_phone = #{userPhone,jdbcType=VARCHAR},
+     </if>
+     <if test="userInvitationCode != null">
+       user_invitation_code = #{userInvitationCode,jdbcType=VARCHAR},
+     </if>
+     <if test="userPhoneCode != null">
+       user_phone_code = #{userPhoneCode,jdbcType=VARCHAR},
+     </if>
+     <if test="userWeixin != null">
+       user_weixin = #{userWeixin,jdbcType=VARCHAR},
+     </if>
+
+   </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from user
     where user_id = #{userId,jdbcType=VARCHAR}

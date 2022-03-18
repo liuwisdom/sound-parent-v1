@@ -4,8 +4,11 @@ import java.util.List;
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.entity.Result;
 import com.wisdom.sound.pojo.User;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
 
@@ -17,27 +20,32 @@ import com.wisdom.sound.service.UserService;
  * @author Administrator
  *
  */
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
 
-	@Reference
+	@DubboReference
 	private UserService userService;
 	
 	/**
 	 * 返回全部列表
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/findAll")
 	public List<User> findAll(){
 		return userService.findAll();
 	}
-	
-	
+
+	@RequestMapping("/tousergroup")
+	public String tousergroup(){
+		return "/admin/user-group";
+	}
 	/**
 	 * 返回全部列表
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/findPage")
 	public PageResult findPage(int page, int rows){
 		return userService.findPage(page, rows);
@@ -48,6 +56,7 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/add")
 	public Result add(@RequestBody User user){
 		try {
@@ -64,6 +73,7 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/update")
 	public Result update(@RequestBody User user){
 		try {
@@ -80,6 +90,7 @@ public class UserController {
 	 * @param id
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/findOne")
 	public User findOne(String id){
 		return userService.findOne(id);		
@@ -90,6 +101,7 @@ public class UserController {
 	 * @param ids
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/delete")
 	public Result delete(String [] ids){
 		try {
@@ -108,6 +120,7 @@ public class UserController {
 	 * @param rows
 	 * @return
 	 */
+	@ResponseBody
 	@RequestMapping("/search")
 	public PageResult search(@RequestBody User user, int page, int rows  ){
 		return userService.findPage(user, page, rows);		

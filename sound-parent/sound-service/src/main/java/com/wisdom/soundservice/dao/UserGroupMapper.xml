@@ -24,6 +24,10 @@
     delete from user_group
     where user_group_id = #{userGroupId,jdbcType=VARCHAR}
   </delete>
+  <delete id="deleteUserGroupByUserId" parameterType="java.lang.String">
+    delete from user_group
+    where user_group_userid = #{userGroupUserid,jdbcType=VARCHAR}
+  </delete>
   <insert id="insert" parameterType="com.wisdom.sound.pojo.UserGroup">
     insert into user_group (user_group_id, user_group_userid, user_group_groupid, 
       user_group_creater, user_group_creattime, user_group_editer, 
