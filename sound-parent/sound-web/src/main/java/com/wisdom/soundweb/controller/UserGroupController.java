@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: sound-parent
@@ -27,10 +29,12 @@ public class UserGroupController {
 
     @ResponseBody
     @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public Result add(String[] ids){
+    public Result add(@RequestBody Map<String,Object> entitynew){
+    //public Result add(@RequestParam String userid,@RequestParam String ids){
         try {
-
-            userService.addUserGroup("11",ids);
+            //System.out.println(entitynew+"sdfsdfds");
+           // System.out.println(ids);
+            userService.addUserGroup(entitynew);
             return new Result(true, "增加成功");
         } catch (Exception e) {
             e.printStackTrace();

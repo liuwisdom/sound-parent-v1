@@ -1,5 +1,7 @@
 package com.wisdom.soundservice.service.impl;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.wisdom.sound.pojo.UserGroup;
 import com.wisdom.soundservice.dao.UserGroupMapper;
@@ -96,7 +98,9 @@ public class UserServiceImpl implements UserService {
 	}
     //循环插入user-group中间表
 	@Override
-	public void addUserGroup(String userid, String[] ids) {
+	public void addUserGroup(Map<String,Object> entitynew) {
+	    List<String> ids= (List<String>) entitynew.get("ids");
+	    String userid= (String) entitynew.get("userid");
 		for (String id:ids) {
 			UserGroup ug=new UserGroup();
 			ug.setUserGroupId(UUIDutil.getUUID());

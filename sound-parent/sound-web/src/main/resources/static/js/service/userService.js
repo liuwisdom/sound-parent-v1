@@ -15,7 +15,14 @@ app.service('userService',function($http){
 	}
 	//增加 
 	this.add=function(userid,ids){
-		return  $http.post('/usergroup/add',ids);
+	    var entity={
+                 userid:userid,
+                 ids:ids
+             };
+        entitynew=JSON.stringify(entity);
+        //ids=JSON.stringify(ids);
+	     alert(entitynew);
+		return  $http.post('/usergroup/add',entitynew);
 	}
 	//修改 
 	this.update=function(entity){

@@ -1,5 +1,7 @@
 package com.wisdom.sound.service;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.pojo.User;
@@ -58,7 +60,7 @@ public interface UserService {
 	 */
 	public PageResult findPage(User user, int pageNum, int pageSize);
 
-    void addUserGroup(String userid, String[] ids);
+    void addUserGroup(Map<String,Object> entitynew);
 
 	void deleteUserGroupByUserId(String userId);
 }

@@ -42,8 +42,13 @@ app.controller('userController' ,function($scope,$controller   ,userService,grou
 	}
 	
 	//保存 
-	$scope.save=function(){				
-	userService.add( $scope.userId ,$scope.selectIds).success(
+	$scope.save=function(){
+	    // $scope.entity={
+        //     userid:$scope.userId,
+        //     ids:$scope.selectIds
+        // };
+
+	userService.add($scope.userId,$scope.selectIds).success(
 			function(response){
 				if(response.success){
 					alert(response.message);
