@@ -5,6 +5,10 @@ app.service('userService',function($http){
 	this.findAll=function(){
 		return $http.get('/user/findAll');
 	}
+	//读取列表数据绑定到表单中
+	this.findGroupOfUser=function(userid){
+		return $http.get('/usergroup/findGroupOfUser?id='+userid);
+	}
 	//分页 
 	this.findPage=function(page,rows){
 		return $http.get('/user/findPage?page='+page+'&rows='+rows);

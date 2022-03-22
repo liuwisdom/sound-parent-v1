@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.wisdom.sound.pojo.Group;
 import com.wisdom.sound.pojo.UserGroup;
 import com.wisdom.soundservice.dao.UserGroupMapper;
 import com.wisdom.soundservice.dao.UserMapper;
@@ -115,6 +116,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteUserGroupByUserId(String userId) {
 		userGroupMapper.deleteUserGroupByUserId(userId);
+	}
+
+	@Override
+	public List<Map> findGroupOfUser(String userId) {
+		return userGroupMapper.findGroupOfUser(userId);
 	}
 
 }

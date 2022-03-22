@@ -1,7 +1,11 @@
 package com.wisdom.soundservice.dao;
 
+import com.wisdom.sound.pojo.Group;
 import com.wisdom.sound.pojo.UserGroup;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface UserGroupMapper {
@@ -18,4 +22,6 @@ public interface UserGroupMapper {
     int updateByPrimaryKey(UserGroup record);
 
     void deleteUserGroupByUserId(String userId);
+
+    List<Map> findGroupOfUser(String userId);
 }

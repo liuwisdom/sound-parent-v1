@@ -2,6 +2,7 @@ package com.wisdom.soundweb.controller;
 
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.entity.Result;
+import com.wisdom.sound.pojo.Group;
 import com.wisdom.sound.pojo.User;
 import com.wisdom.sound.service.UserService;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -52,12 +53,17 @@ public class UserGroupController {
     @RequestMapping("/delete")
     public Result delete(String  userId){
         try {
-            userService.deleteUserGroupByUserId(userId);
+           userService.deleteUserGroupByUserId(userId);
             return new Result(true, "删除成功");
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false, "删除失败");
         }
+    }
+    @ResponseBody
+    @RequestMapping("/findGroupOfUser")
+    public List<Map>  findGroupOfUser(String  id){
+        return userService.findGroupOfUser(id);
     }
 
 }

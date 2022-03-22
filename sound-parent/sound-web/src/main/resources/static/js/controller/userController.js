@@ -21,6 +21,14 @@ app.controller('userController' ,function($scope,$controller   ,userService,grou
 			}
 		);
 	}
+	//读取组列表数据绑定到表单中
+	$scope.viewGroup=function(userid){
+		userService.findGroupOfUser(userid).success(
+			function(response){
+				$scope.viewGrouplist=response;
+			}
+		);
+	}
 	
 	//分页
 	$scope.findPage=function(page,rows){			

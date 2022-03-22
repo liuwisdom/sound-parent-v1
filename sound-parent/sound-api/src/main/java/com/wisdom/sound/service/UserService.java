@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.wisdom.sound.entity.PageResult;
+import com.wisdom.sound.pojo.Group;
 import com.wisdom.sound.pojo.User;
 /**
  * 服务层接口
@@ -63,4 +64,6 @@ public interface UserService {
     void addUserGroup(Map<String,Object> entitynew);
 
 	void deleteUserGroupByUserId(String userId);
+
+	List<Map> findGroupOfUser(String userId);
 }
