@@ -31,7 +31,7 @@ public class RoleServiceImpl implements RoleService {
 	 */
 	@Override
 	public List<Role> findAll() {
-		return (List<Role>) roleMapper.selectByExample(null);
+		return (List<Role>) roleMapper.findAll();
 	}
 
 	/**

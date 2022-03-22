@@ -9,6 +9,10 @@ app.service('userService',function($http){
 	this.findGroupOfUser=function(userid){
 		return $http.get('/usergroup/findGroupOfUser?id='+userid);
 	}
+	//读取列表数据绑定到表单中
+	this.findRoleOfUser=function(userid){
+		return $http.get('/userrole/findRoleOfUser?id='+userid);
+	}
 	//分页 
 	this.findPage=function(page,rows){
 		return $http.get('/user/findPage?page='+page+'&rows='+rows);
@@ -27,6 +31,17 @@ app.service('userService',function($http){
         //ids=JSON.stringify(ids);
 	     alert(entitynew);
 		return  $http.post('/usergroup/add',entitynew);
+	}
+	//增加
+	this.addRole=function(userid,ids){
+	    var entity={
+                 userid:userid,
+                 ids:ids
+             };
+        entitynew=JSON.stringify(entity);
+        //ids=JSON.stringify(ids);
+	     alert(entitynew);
+		return  $http.post('/userrole/addRole',entitynew);
 	}
 	//修改 
 	this.update=function(entity){

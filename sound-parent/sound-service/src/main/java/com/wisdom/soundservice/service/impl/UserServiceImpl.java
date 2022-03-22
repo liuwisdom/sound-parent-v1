@@ -5,10 +5,12 @@ import java.util.Map;
 
 import com.wisdom.sound.pojo.Group;
 import com.wisdom.sound.pojo.UserGroup;
+import com.wisdom.sound.pojo.UserRole;
 import com.wisdom.soundservice.dao.UserGroupMapper;
 import com.wisdom.soundservice.dao.UserMapper;
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.pojo.User;
+import com.wisdom.soundservice.dao.UserRoleMapper;
 import com.wisdom.util.numutil.UUIDutil;
 import com.wisdom.util.numutil.dateUtil;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -34,6 +36,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserGroupMapper userGroupMapper;
+
+	@Autowired
+	private UserRoleMapper userRoleMapper;
 	
 	/**
 	 * 查询全部
@@ -121,6 +126,26 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Map> findGroupOfUser(String userId) {
 		return userGroupMapper.findGroupOfUser(userId);
+	}
+
+	@Override
+	public void addUserRole(Map<String, Object> entitynew) {
+		List<String> ids= (List<String>) entitynew.get("ids");
+		String userid= (String) entitynew.get("userid");
+		for (String id:ids) {
+			UserRole ur=new UserRole();
+			ur.setUserRoleId(UUIDutil.getUUID());
+			ur.setUserRoleUserid(userid);
+			ur.setUserRoleRoleid(id);
+			ur.setUserRoleCreattime(dateUtil.getDate());
+			ur.setUserRoleEdittime(dateUtil.getDate());
+			userRoleMapper.insert(ur);
+		}
+	}
+
+	@Override
+	public List<Map> findRoleOfUser(String id) {
+		return userRoleMapper.findRoleOfUser(id);
 	}
 
 }

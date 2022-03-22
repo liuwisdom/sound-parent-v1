@@ -1,5 +1,5 @@
  //控制层 
-app.controller('userController' ,function($scope,$controller   ,userService,groupService){
+app.controller('userController' ,function($scope,$controller   ,userService,roleService,groupService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -29,6 +29,24 @@ app.controller('userController' ,function($scope,$controller   ,userService,grou
 			}
 		);
 	}
+	//读取角色列表数据绑定到表单中
+	$scope.addRole=function(userid){
+		//暂存用户id
+		$scope.userId=userid;
+		roleService.findAll().success(
+			function(response){
+				$scope.rolelist=response;
+			}
+		);
+	}
+	//读取角色列表数据绑定到表单中
+	$scope.viewRole=function(userid){
+		userService.findRoleOfUser(userid).success(
+			function(response){
+				$scope.viewRolelist=response;
+			}
+		);
+	}
 	
 	//分页
 	$scope.findPage=function(page,rows){			
@@ -51,11 +69,6 @@ app.controller('userController' ,function($scope,$controller   ,userService,grou
 	
 	//保存 
 	$scope.save=function(){
-	    // $scope.entity={
-        //     userid:$scope.userId,
-        //     ids:$scope.selectIds
-        // };
-
 	userService.add($scope.userId,$scope.selectIds).success(
 			function(response){
 				if(response.success){
@@ -63,6 +76,16 @@ app.controller('userController' ,function($scope,$controller   ,userService,grou
 				}
 			}		
 		);				
+	}
+	//保存角色
+	$scope.saveRole=function(){
+	userService.addRole($scope.userId,$scope.selectIds).success(
+			function(response){
+				if(response.success){
+					alert(response.message);
+				}
+			}
+		);
 	}
 	
 	 

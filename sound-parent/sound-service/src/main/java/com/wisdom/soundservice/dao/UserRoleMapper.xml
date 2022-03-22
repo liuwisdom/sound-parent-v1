@@ -20,6 +20,17 @@
     from user_role
     where user_role_id = #{userRoleId,jdbcType=VARCHAR}
   </select>
+<!--  关联查询中间表产寻用户ID下所有角色信息-->
+  <select id="findRoleOfUser" parameterType="java.lang.String" resultType="java.util.Map">
+    SELECT
+      *
+    FROM
+      user_role ur
+        LEFT JOIN role r ON ur.user_role_roleid = r.role_id
+    WHERE
+      ur.user_role_userid = #{userRoleUserid,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from user_role
     where user_role_id = #{userRoleId,jdbcType=VARCHAR}

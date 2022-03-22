@@ -66,4 +66,8 @@ public interface UserService {
 	void deleteUserGroupByUserId(String userId);
 
 	List<Map> findGroupOfUser(String userId);
+
+    void addUserRole(Map<String, Object> entitynew);
+
+	List<Map> findRoleOfUser(String id);
 }

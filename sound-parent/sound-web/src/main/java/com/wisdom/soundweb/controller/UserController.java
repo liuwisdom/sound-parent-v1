@@ -41,6 +41,11 @@ public class UserController {
 	public String tousergroup(){
 		return "/admin/user-group";
 	}
+
+	@RequestMapping("/touserrole")
+	public String touserrole(){
+		return "/admin/user-role";
+	}
 	/**
 	 * 返回全部列表
 	 * @return
