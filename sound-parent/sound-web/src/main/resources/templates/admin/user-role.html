@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html  ng-app="sound">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>角色管理</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../plugins/angularjs/pagination.css">
+    <script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../../plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!--angularjs相关-->
+    <script src="../../plugins/angularjs/angular.min.js"></script>
+    <script src="../../plugins/angularjs/angular-route.min.js"></script>
+    <script src="../../plugins/angularjs/angular-animate.min.js"></script>
+    <!--angularjs相关-->
+
+    <!--分页插件-->
+    <script src="../../plugins/angularjs/pagination.js"></script>
+    <!--分页插件-->
+    <!--sound 项目 组 base-controlleer controller service base base-pagenation-->
+    <script src="../../js/base_pagination.js"></script>
+    <script src="../../js/controller/baseController.js"></script>
+    <script src="../../js/controller/roleController.js"></script>
+    <script src="../../js/service/roleService.js"></script>
+    <script src="../../js/service/groupService.js"></script>
+    <script src="../../js/controller/userController.js"></script>
+    <script src="../../js/service/userService.js"></script>
+    <!--sound 项目 组 base-controlleer controller service base base-pagenation-->
+
+
+</head>
+<body class="hold-transition skin-red sidebar-mini"  ng-controller="userController" >
+<!-- .box-body -->
+<div class="box-header with-border">
+    <h3 class="box-title">用户-角色管理</h3>
+</div>
+
+<div class="box-body">
+
+    <!-- 数据表格 -->
+    <div class="table-box">
+        <div class="box-tools pull-right">
+            <div class="has-feedback">
+
+            </div>
+        </div>
+        <!--工具栏/-->
+
+        <!--数据列表-->
+        <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+            <thead>
+            <tr>
+                <!--<th class="" style="padding-right:0px">-->
+                    <!--<input id="selall" type="checkbox" class="icheckbox_square-blue">-->
+                <!--</th>-->
+                <th class="sorting_asc">用户ID</th>
+                <th class="sorting">用户名称</th>
+                <th class="sorting">手机号</th>
+                <th class="sorting">推荐码</th>
+                <th class="sorting">微信号</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in list">
+                <td>{{user.userId}}</td>
+                <td>{{user.userAccount}}</td>
+                <td>{{user.userPhone}}</td>
+                <td>{{user.userPhoneCode}}</td>
+                <td>{{user.userWeixin}}</td>
+                <td class="text-center">
+                    <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" ng-click="addRole(user.userId)" >添加角色</button>
+                    <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#viewModal" ng-click="viewRole(user.userId)" >查看角色</button>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+    <!-- 数据表格 /-->
+
+    <!-- 数据表格 /-->
+    <!-- 分页 -->
+    <tm-pagination conf="paginationConf"></tm-pagination>
+
+</div>
+<!-- /.box-body -->
+
+
+<!-- 编辑窗口 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">用户-角色编辑</h3>
+            </div>
+            <div class="table-box">
+
+                <!--工具栏-->
+
+                <div class="box-tools pull-right">
+                    <div class="has-feedback">
+
+                    </div>
+                </div>
+                <!--工具栏/-->
+
+                <!--数据列表-->
+                <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+                    <thead>
+                    <tr>
+                        <th class="" style="padding-right:0px">
+                            <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                        </th>
+                        <th class="sorting">角色代码</th>
+                        <th class="sorting">角色名称</th>
+                        <th class="sorting">父角色ID</th>
+                        <th class="sorting">角色状态</th>
+                        <th class="sorting">创建人</th>
+                        <th class="sorting">修改人</th>
+                        <th class="sorting">角色说明</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="role in rolelist">
+                        <td><input  type="checkbox" ng-click="updateSelection($event,role.roleId)"/></td>
+                        <td>{{role.roleCode}}</td>
+                        <td>{{role.roleName}}</td>
+                        <td>{{jsonToString(role.roleParentid,'text')}}</td>
+                        <td>{{stateToZh(role.roleState)}}</td>
+                        <td>{{role.roleCreater}}</td>
+                        <td>{{role.roleEditer}}</td>
+                        <td>{{role.roleDescription}}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <!--数据列表/-->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="saveRole()">保存</button>
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--查看窗口-->
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">用户-角色查看</h3>
+            </div>
+            <div class="table-box">
+
+                <!--工具栏-->
+
+                <div class="box-tools pull-right">
+                    <div class="has-feedback">
+
+                    </div>
+                </div>
+                <!--工具栏/-->
+        <!--数据列表-->
+        <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+            <thead>
+            <tr>
+                <th class="sorting">角色代码</th>
+                <th class="sorting">角色名称</th>
+                <th class="sorting">父角色ID</th>
+                <th class="sorting">角色状态</th>
+                <th class="sorting">创建人</th>
+                <th class="sorting">修改人</th>
+                <th class="sorting">角色说明</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="viewRole in viewRolelist">
+                <td>{{viewRole.ROLE_code}}</td>
+                <td>{{viewRole.ROLE_name}}</td>
+                <td>{{jsonToString(viewRole.ROLE_parentid,'text')}}</td>
+                <td>{{stateToZh(viewRole.ROLE_state)}}</td>
+                <td>{{viewRole.ROLE_creater}}</td>
+                <td>{{viewRole.ROLE_editer}}</td>
+                <td>{{viewRole.ROLE_description}}</td>
+            </tr>
+            <!--<tr>-->
+                <!--{{viewGrouplist}}-->
+            <!--</tr>-->
+
+            </tbody>
+        </table>
+        <!--数据列表-->
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+<!--查看窗口-->
+</body>
+</html>
