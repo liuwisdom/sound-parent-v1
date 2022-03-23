@@ -32,7 +32,7 @@ public class ResourceServiceImpl implements ResourceService {
 	 */
 	@Override
 	public List<Resource> findAll() {
-		return resourceMapper.selectByExample(null);
+		return resourceMapper.findAll();
 	}
 
 	/**

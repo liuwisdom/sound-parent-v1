@@ -25,6 +25,51 @@
     from permission
     where permission_id = #{permissionId,jdbcType=VARCHAR}
   </select>
+  <select id="findAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from permission
+  </select>
+  <select id="selectByExample" parameterType="com.wisdom.sound.pojo.Permission" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from permission
+    <where>
+      <if test="permissionId != null">
+        permission_id = #{permissionId,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionName != null">
+        permission_name = #{permissionName,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionCode != null">
+        permission_code = #{permissionCode,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionParentid != null">
+        permission_parentid = #{permissionParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionUrl != null">
+        permission_url = #{permissionUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionState != null">
+        permission_state = #{permissionState,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionCreater != null">
+        permission_creater = #{permissionCreater,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionCreattime != null">
+        permission_creattime = #{permissionCreattime,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionEditer != null">
+        permission_editer = #{permissionEditer,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionEdittime != null">
+        permission_edittime = #{permissionEdittime,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionDescription != null">
+        permission_description = #{permissionDescription,jdbcType=VARCHAR},
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from permission
     where permission_id = #{permissionId,jdbcType=VARCHAR}

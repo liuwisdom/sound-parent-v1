@@ -10,7 +10,16 @@ app.controller('permissionController' ,function($scope,$controller   ,permission
 				$scope.list=response;
 			}			
 		);
-	}    
+	}
+	$scope.permissionList={data:[]};
+	$scope.findForSelect2=function (){
+		$scope.entity={};
+		permissionService.findForSelect2().success(
+			function(response){
+				$scope.permissionList= {data:response};
+			}
+		);
+	}
 	
 	//分页
 	$scope.findPage=function(page,rows){			
@@ -26,19 +35,21 @@ app.controller('permissionController' ,function($scope,$controller   ,permission
 	$scope.findOne=function(id){				
 		permissionService.findOne(id).success(
 			function(response){
-				$scope.entity= response;					
+				$scope.entity=response
+				$scope.entity.permissioParentid=JSON.parse(response.permissioParentid);
 			}
 		);				
 	}
 	
 	//保存 
-	$scope.save=function(){				
-		var serviceObject;//服务层对象  				
-		if($scope.entity.id!=null){//如果有ID
-			serviceObject=permissionService.update( $scope.entity ); //修改  
+	$scope.save=function(){
+		var serviceObject;//服务层对象
+		$scope.entity.permissionParentid=JSON.stringify($scope.entity.permissionParentid);
+		if($scope.entity.permissionId!=null){//如果有ID
+			serviceObject=permissionService.update($scope.entity); //修改
 		}else{
-			serviceObject=permissionService.add( $scope.entity  );//增加 
-		}				
+			serviceObject=permissionService.add($scope.entity);//增加
+		}
 		serviceObject.success(
 			function(response){
 				if(response.success){

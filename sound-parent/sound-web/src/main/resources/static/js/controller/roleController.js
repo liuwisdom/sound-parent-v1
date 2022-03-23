@@ -1,5 +1,5 @@
  //控制层 
-app.controller('roleController' ,function($scope,$controller   ,roleService,groupService){
+app.controller('roleController' ,function($scope,$controller   ,roleService,groupService,permissionService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -100,6 +100,15 @@ app.controller('roleController' ,function($scope,$controller   ,roleService,grou
 			}
 		);
 	}
+	//查询所有资源展示资源列表供role选择
+	$scope.addPermission=function (roleid) {
+	    $scope.roleid=roleid;
+		permissionService.findAll().success(
+			function (response) {
+				$scope.permissionList=response;
+			}
+		);
+	}
 	//通过roleid查询关联表，查询该roleid下的所有已经分配的组信息
 	$scope.viewGroup=function (roleid) {
 		roleService.findGroupOfRole(roleid).success(
@@ -108,10 +117,26 @@ app.controller('roleController' ,function($scope,$controller   ,roleService,grou
 			}
 		);
 	}
+	//通过roleid查询关联表，查询该roleid下的所有已经分配的资源信息
+	$scope.viewPermission=function (roleid) {
+		roleService.findPermissionOfRole(roleid).success(
+			function (response) {
+				$scope.viewPermissionList=response;
+			}
+		);
+	}
 
 	//保存关联信息至中间表
 	$scope.saveGroup=function () {
 		roleService.saveGroup($scope.roleid,$scope.selectIds).success(
+			function (response) {
+				alert(response.message);
+			}
+		);
+	}
+	//保存关联信息至中间表
+	$scope.savePermission=function () {
+		roleService.savePermission($scope.roleid,$scope.selectIds).success(
 			function (response) {
 				alert(response.message);
 			}

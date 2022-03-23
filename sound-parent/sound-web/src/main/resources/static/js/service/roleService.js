@@ -41,8 +41,20 @@ app.service('roleService',function($http){
 		}
 		return $http.post('/rolegroup/addGroup',entitynew);
 	}
+	//保存关联资源信息
+	this.savePermission=function(roleid,ids){
+		var entitynew={
+			roleid:roleid,
+			ids:ids
+		}
+		return $http.post('/rolepermission/addPermission',entitynew);
+	}
 	//查询该roleid下的关联组信息
 	this.findGroupOfRole=function (roleid) {
 		return $http.get('/rolegroup/findGroupOfRole?id='+roleid)
+	}
+	//查询该roleid下的关联资源信息
+	this.findPermissionOfRole=function (roleid) {
+		return $http.get('/rolepermission/findPermissionOfRole?id='+roleid)
 	}
 });

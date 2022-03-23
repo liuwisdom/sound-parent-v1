@@ -75,4 +75,8 @@ public interface RoleService {
 	void deleteRoleGroupByUserId(String roleId);
 
 	List<Map> findGroupOfRole(String id);
+
+    void addRolePermission(Map<String, Object> entitynew);
+
+	List<Map> findPermissionOfRole(String id);
 }

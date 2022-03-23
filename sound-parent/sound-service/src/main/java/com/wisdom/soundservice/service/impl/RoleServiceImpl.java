@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.wisdom.sound.pojo.RoleGroup;
+import com.wisdom.sound.pojo.RolePermission;
 import com.wisdom.soundservice.dao.RoleGroupMapper;
 import com.wisdom.soundservice.dao.RoleMapper;
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.pojo.Role;
+import com.wisdom.soundservice.dao.RolePermissionMapper;
 import com.wisdom.util.numutil.UUIDutil;
 import com.wisdom.util.numutil.dateUtil;
 import org.apache.dubbo.config.annotation.DubboService;
@@ -31,6 +33,9 @@ public class RoleServiceImpl implements RoleService {
 
 	@Autowired
 	private RoleGroupMapper roleGroupMapper;
+
+	@Autowired
+	private RolePermissionMapper rolePermissionMapper;
 	
 	/**
 	 * 查询全部
@@ -140,6 +145,26 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public List<Map> findGroupOfRole(String id) {
 		return roleGroupMapper.findGroupOfRole(id);
+	}
+
+	@Override
+	public void addRolePermission(Map<String, Object> entitynew) {
+		String roleid= (String) entitynew.get("roleid");
+		List<String> ids= (List) entitynew.get("ids");
+		for (String id:ids) {
+			RolePermission rp=new RolePermission();
+			rp.setRolePermissionId(UUIDutil.getUUID());
+			rp.setRolePermissionRoleid(roleid);
+			rp.setRolePermissionPermissionid(id);
+			rp.setRolePermissionCreattime(dateUtil.getDate());
+			rp.setRolePermissionEdittime(dateUtil.getDate());
+			rolePermissionMapper.insert(rp);
+		}
+	}
+
+	@Override
+	public List<Map> findPermissionOfRole(String id) {
+		return rolePermissionMapper.findPermissionOfRole(id);
 	}
 
 }

@@ -24,8 +24,8 @@
 	<!--sound 项目 组 base-controlleer controller service base base-pagenation-->
 	<script src="../../js/base_pagination.js"></script>
 	<script src="../../js/controller/baseController.js"></script>
-	<script src="../../js/controller/groupController.js"></script>
-	<script src="../../js/service/groupService.js"></script>
+	<script src="../../js/controller/permissionController.js"></script>
+	<script src="../../js/service/permissionService.js"></script>
 	<!--sound 项目 组 base-controlleer controller service base base-pagenation-->
 
 	<!-- 引入select2的相关的css和js -->
@@ -36,10 +36,10 @@
 
 	<!-- 引入select2的相关的css和js -->
 </head>
-<body class="hold-transition skin-red sidebar-mini"  ng-controller="groupController" >
+<body class="hold-transition skin-red sidebar-mini"  ng-controller="permissionController" >
 <!-- .box-body -->
 <div class="box-header with-border">
-	<h3 class="box-title">组管理</h3>
+	<h3 class="box-title">权限管理</h3>
 </div>
 
 <div class="box-body">
@@ -51,7 +51,7 @@
 		<div class="pull-left">
 			<div class="form-group form-inline">
 				<div class="btn-group">
-					<button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ng-click="findAll()"><i class="fa fa-file-o"></i> 新建</button>
+					<button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ng-click="findForSelect2()"><i class="fa fa-file-o"></i> 新建</button>
 					<button type="button" class="btn btn-default" title="删除"  ng-click="dele()"><i class="fa fa-trash-o"></i> 删除</button>
 					<button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
 				</div>
@@ -71,7 +71,7 @@
 				<th class="" style="padding-right:0px">
 					<input id="selall" type="checkbox" class="icheckbox_square-blue">
 				</th>
-				<th class="sorting_asc">用户组ID</th>
+				<th class="sorting_asc">ID</th>
 				<th class="sorting">用户组名称</th>
 				<th class="sorting">用户组代码</th>
 				<th class="sorting">父组ID</th>
@@ -85,21 +85,20 @@
 			</tr>
 			</thead>
 			<tbody>
-			<tr ng-repeat="sgroup in list">
-				<td><input  type="checkbox" ng-click="updateSelection($event,sgroup.groupId)"/></td>
-				<td>{{sgroup.groupId}}</td>
-				<td>{{sgroup.groupName}}</td>
-				<td>{{sgroup.groupCode}}</td>
-				<!--<td>{{sgroup.groupParentid}}</td>-->
-				<td>{{jsonToString(sgroup.groupParentid,'text')}}</td>
-				<td>{{stateToZh(sgroup.groupState)}}</td>
-				<td>{{sgroup.groupCreater}}</td>
-				<td>{{sgroup.groupCreattime}}</td>
-				<td>{{sgroup.groupEditer}}</td>
-				<td>{{sgroup.groupEdittime}}</td>
-				<td>{{sgroup.groupDescription}}</td>
+			<tr ng-repeat="permission in list">
+				<td><input  type="checkbox" ng-click="updateSelection($event,permission.permissionId)"/></td>
+				<td>{{permission.permissionId}}</td>
+				<td>{{permission.permissionName}}</td>
+				<td>{{permission.permissionCode}}</td>
+				<td>{{jsonToString(permission.permissionParentid,'text')}}</td>
+				<td>{{stateToZh(permission.permissionState)}}</td>
+				<td>{{permission.permissionCreater}}</td>
+				<td>{{permission.permissionCreattime}}</td>
+				<td>{{permission.permissionEditer}}</td>
+				<td>{{permission.permissionEdittime}}</td>
+				<td>{{permission.permissionDescription}}</td>
 				<td class="text-center">
-					<button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" ng-click="findOne(sgroup.groupId)" >修改</button>
+					<button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" ng-click="findOne(permission.permissionId)" >修改</button>
 				</td>
 			</tr>
 
@@ -146,7 +145,7 @@
                                   select2-model:绑定下拉列表的id和value
                                   config:代表的是数据的来源
                                -->
-							<input select2  select2-model="entity.groupParentid" config="groupList" multiple placeholder="支持多选哦" class="form-control" type="text"/>
+							<input select2  select2-model="entity.permissionParentid" config="permissionList" multiple placeholder="支持多选哦" class="form-control" type="text"/>
 						</td>
 					</tr>
 					<tr>

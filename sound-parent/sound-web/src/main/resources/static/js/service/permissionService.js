@@ -3,30 +3,33 @@ app.service('permissionService',function($http){
 	    	
 	//读取列表数据绑定到表单中
 	this.findAll=function(){
-		return $http.get('../permission/findAll.do');		
+		return $http.get('/permission/findAll');
+	}
+	this.findForSelect2=function(){
+		return $http.get('/permission/findForSelect2');
 	}
 	//分页 
 	this.findPage=function(page,rows){
-		return $http.get('../permission/findPage.do?page='+page+'&rows='+rows);
+		return $http.get('/permission/findPage?page='+page+'&rows='+rows);
 	}
 	//查询实体
 	this.findOne=function(id){
-		return $http.get('../permission/findOne.do?id='+id);
+		return $http.get('/permission/findOne?id='+id);
 	}
 	//增加 
 	this.add=function(entity){
-		return  $http.post('../permission/add.do',entity );
+		return  $http.post('/permission/add',entity );
 	}
 	//修改 
 	this.update=function(entity){
-		return  $http.post('../permission/update.do',entity );
+		return  $http.post('/permission/update',entity );
 	}
 	//删除
 	this.dele=function(ids){
-		return $http.get('../permission/delete.do?ids='+ids);
+		return $http.get('/permission/delete?ids='+ids);
 	}
 	//搜索
 	this.search=function(page,rows,searchEntity){
-		return $http.post('../permission/search.do?page='+page+"&rows="+rows, searchEntity);
+		return $http.post('/permission/search?page='+page+"&rows="+rows, searchEntity);
 	}    	
 });

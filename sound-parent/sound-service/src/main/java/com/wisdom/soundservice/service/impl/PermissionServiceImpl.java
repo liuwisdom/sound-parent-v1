@@ -29,7 +29,7 @@ public class PermissionServiceImpl implements PermissionService {
 	 */
 	@Override
 	public List<Permission> findAll() {
-		return permissionMapper.selectByExample(null);
+		return permissionMapper.findAll();
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class PermissionServiceImpl implements PermissionService {
 	@Override
 	public PageResult findPage(int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);		
-		Page<Permission> page=   (Page<Permission>) permissionMapper.selectByExample(null);
+		Page<Permission> page=   (Page<Permission>) permissionMapper.findAll();
 		return new PageResult(page.getTotal(), page.getResult());
 	}
 
@@ -83,8 +83,8 @@ public class PermissionServiceImpl implements PermissionService {
 		@Override
 	public PageResult findPage(Permission permission, int pageNum, int pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
-		
-		return null;
+		Page<Permission> page=   (Page<Permission>) permissionMapper.selectByExample(permission);
+		return new PageResult(page.getTotal(), page.getResult());
 	}
 	
 }
