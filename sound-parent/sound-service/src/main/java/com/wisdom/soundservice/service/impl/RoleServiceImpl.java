@@ -1,7 +1,10 @@
 package com.wisdom.soundservice.service.impl;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.wisdom.sound.pojo.RoleGroup;
+import com.wisdom.soundservice.dao.RoleGroupMapper;
 import com.wisdom.soundservice.dao.RoleMapper;
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.pojo.Role;
@@ -25,6 +28,9 @@ public class RoleServiceImpl implements RoleService {
 
 	@Autowired
 	private RoleMapper roleMapper;
+
+	@Autowired
+	private RoleGroupMapper roleGroupMapper;
 	
 	/**
 	 * 查询全部
@@ -108,6 +114,32 @@ public class RoleServiceImpl implements RoleService {
 	public List<HashMap<String, String>> findForSelect2() {
 
 		return roleMapper.findForSelect2();
+	}
+
+	@Override
+	public void addRoleGroup(Map<String, Object> entitynew) {
+		String roleid= (String) entitynew.get("roleid");
+		List<String> ids= (List) entitynew.get("ids");
+		for (String id:ids) {
+			RoleGroup rg=new RoleGroup();
+			rg.setRoleGroupId(UUIDutil.getUUID());
+			rg.setRoleGroupRoleid(roleid);
+			rg.setRoleGroupGroupid(id);
+			rg.setRoleGroupCreattime(dateUtil.getDate());
+			rg.setRoleGroupEdittime(dateUtil. getDate());
+			roleGroupMapper.insert(rg);
+		}
+
+	}
+
+	@Override
+	public void deleteRoleGroupByUserId(String roleId) {
+
+	}
+
+	@Override
+	public List<Map> findGroupOfRole(String id) {
+		return roleGroupMapper.findGroupOfRole(id);
 	}
 
 }

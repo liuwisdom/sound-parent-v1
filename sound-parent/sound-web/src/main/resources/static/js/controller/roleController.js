@@ -1,5 +1,5 @@
  //控制层 
-app.controller('roleController' ,function($scope,$controller   ,roleService){	
+app.controller('roleController' ,function($scope,$controller   ,roleService,groupService){
 	
 	$controller('baseController',{$scope:$scope});//继承
 	
@@ -88,6 +88,33 @@ app.controller('roleController' ,function($scope,$controller   ,roleService){
 				$scope.list=response.rows;	
 				$scope.paginationConf.totalItems=response.total;//更新总记录数
 			}			
+		);
+	}
+
+	//查询所有组展示组列表供role选择
+	$scope.addGroup=function (roleid) {
+	    $scope.roleid=roleid;
+		groupService.findAll().success(
+			function (response) {
+				$scope.groupList=response;
+			}
+		);
+	}
+	//通过roleid查询关联表，查询该roleid下的所有已经分配的组信息
+	$scope.viewGroup=function (roleid) {
+		roleService.findGroupOfRole(roleid).success(
+			function (response) {
+				$scope.viewGroupList=response;
+			}
+		);
+	}
+
+	//保存关联信息至中间表
+	$scope.saveGroup=function () {
+		roleService.saveGroup($scope.roleid,$scope.selectIds).success(
+			function (response) {
+				alert(response.message);
+			}
 		);
 	}
     

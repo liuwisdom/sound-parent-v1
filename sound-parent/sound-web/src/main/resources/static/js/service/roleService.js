@@ -32,5 +32,17 @@ app.service('roleService',function($http){
 	//搜索
 	this.search=function(page,rows,searchEntity){
 		return $http.post('/role/search?page='+page+"&rows="+rows, searchEntity);
-	}    	
+	}
+	//保存关联组信息
+	this.saveGroup=function(roleid,ids){
+		var entitynew={
+			roleid:roleid,
+			ids:ids
+		}
+		return $http.post('/rolegroup/addGroup',entitynew);
+	}
+	//查询该roleid下的关联组信息
+	this.findGroupOfRole=function (roleid) {
+		return $http.get('/rolegroup/findGroupOfRole?id='+roleid)
+	}
 });

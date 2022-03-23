@@ -1,6 +1,7 @@
 package com.wisdom.sound.service;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 import com.wisdom.sound.entity.PageResult;
@@ -68,4 +69,10 @@ public interface RoleService {
 	 * @author  liuwisdom
 	 */
     List<HashMap<String, String>> findForSelect2();
+
+    void addRoleGroup(Map<String, Object> entitynew);
+
+	void deleteRoleGroupByUserId(String roleId);
+
+	List<Map> findGroupOfRole(String id);
 }
