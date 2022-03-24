@@ -1,5 +1,6 @@
 package com.wisdom.sound.service;
 import java.util.List;
+import java.util.Map;
 
 
 import com.wisdom.sound.entity.PageResult;
@@ -59,5 +60,6 @@ public interface PermissionService {
 	 * @return
 	 */
 	public PageResult findPage(Permission permission, int pageNum, int pageSize);
-	
+
+    List<Map> findForSelect2();
 }

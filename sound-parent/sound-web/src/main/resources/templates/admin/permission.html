@@ -71,16 +71,16 @@
 				<th class="" style="padding-right:0px">
 					<input id="selall" type="checkbox" class="icheckbox_square-blue">
 				</th>
-				<th class="sorting_asc">ID</th>
-				<th class="sorting">用户组名称</th>
-				<th class="sorting">用户组代码</th>
-				<th class="sorting">父组ID</th>
-				<th class="sorting">用户组状态</th>
+				<th class="sorting_asc">权限ID</th>
+				<th class="sorting">权限名称</th>
+				<th class="sorting">权限代码</th>
+				<th class="sorting">父权限ID</th>
+				<th class="sorting">权限状态</th>
 				<th class="sorting">创建人</th>
 				<th class="sorting">创建时间</th>
 				<th class="sorting">修改人</th>
 				<th class="sorting">修改时间</th>
-				<th class="sorting">组说明</th>
+				<th class="sorting">权限说明</th>
 				<th class="text-center">操作</th>
 			</tr>
 			</thead>
@@ -124,20 +124,20 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h3 id="myModalLabel">用户组编辑</h3>
+				<h3 id="myModalLabel">权限编辑</h3>
 			</div>
 			<div class="modal-body">
 				<table class="table table-bordered table-striped"  width="800px">
 					<tr>
-						<td>用户组名称</td>
-						<td><input  class="form-control" placeholder="用户组名称" ng-model="entity.groupName">  </td>
+						<td>权限名称</td>
+						<td><input  class="form-control" placeholder="权限名称" ng-model="entity.permissionName">  </td>
 					</tr>
 					<tr>
-						<td>组代码</td>
-						<td><input  class="form-control" placeholder="组代码" ng-model="entity.groupCode">  </td>
+						<td>权限代码</td>
+						<td><input  class="form-control" placeholder="权限代码" ng-model="entity.permissionCode">  </td>
 					</tr>
 					<tr>
-						<td>父组ID</td>
+						<td>父权限ID</td>
 						<td>
 							<!--<input  class="form-control" placeholder="父组ID" ng-model="entity.groupParentid">  -->
 							<!--
@@ -149,18 +149,18 @@
 						</td>
 					</tr>
 					<tr>
-						<td>组状态</td>
+						<td>权限状态</td>
 						<!--<td><input  class="form-control" placeholder="组状态" ng-model="entity.groupState">  </td> -->
 						<td>
 							<div class="form-group">
 								<label  class="radio-inline">
-									<input type="radio" class="col-sm-4" name="level" ng-model="entity.groupState" value="1"/>  启用
+									<input type="radio" class="col-sm-4" name="level" ng-model="entity.permissionState" value="1"/>  启用
 								</label>
 								<label class="radio-inline">
-									<input type="radio" class="col-sm-4" name="level" ng-model="entity.groupState"value="2" />  废弃
+									<input type="radio" class="col-sm-4" name="level" ng-model="entity.permissionState"value="2" />  废弃
 								</label>
 								<label  class="radio-inline">
-									<input type="radio" class="col-sm-4" name="level" ng-model="entity.groupState" value="3"/>  临时
+									<input type="radio" class="col-sm-4" name="level" ng-model="entity.permissionState" value="3"/>  临时
 								</label>
 							</div>
 						</td>
@@ -168,23 +168,23 @@
 					</tr>
 					<tr>
 						<td>创建人</td>
-						<td><input  class="form-control" placeholder="创建人" ng-model="entity.groupCreater">  </td>
+						<td><input  class="form-control" placeholder="创建人" ng-model="entity.permissionCreater">  </td>
 					</tr>
 					<tr>
 						<td>创建时间</td>
-						<td><input  class="form-control" placeholder="创建时间" ng-model="entity.groupCreattime">  </td>
+						<td><input  class="form-control" placeholder="创建时间" ng-model="entity.permissionCreattime">  </td>
 					</tr>
 					<tr>
 						<td>修改人</td>
-						<td><input  class="form-control" placeholder="修改人" ng-model="entity.groupEditer">  </td>
+						<td><input  class="form-control" placeholder="修改人" ng-model="entity.permissionEditer">  </td>
 					</tr>
 					<tr>
 						<td>修改时间</td>
-						<td><input  class="form-control" placeholder="修改时间"ng-model="entity.groupEdittime">  </td>
+						<td><input  class="form-control" placeholder="修改时间"ng-model="entity.permissionEdittime">  </td>
 					</tr>
 					<tr>
-						<td>组描述</td>
-						<td><input  class="form-control" placeholder="组描述"ng-model="entity.groupDescription">  </td>
+						<td>权限描述</td>
+						<td><input  class="form-control" placeholder="权限描述"ng-model="entity.permissionDescription">  </td>
 					</tr>
 
 

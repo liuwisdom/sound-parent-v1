@@ -1,11 +1,14 @@
 package com.wisdom.soundservice.service.impl;
 import java.util.List;
+import java.util.Map;
 
 import com.wisdom.soundservice.dao.PermissionMapper;
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.pojo.Permission;
+import com.wisdom.util.numutil.UUIDutil;
+import com.wisdom.util.numutil.dateUtil;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
@@ -18,7 +21,7 @@ import com.wisdom.sound.service.PermissionService;
  * @author Administrator
  *
  */
-@Service
+@DubboService
 public class PermissionServiceImpl implements PermissionService {
 
 	@Autowired
@@ -47,7 +50,10 @@ public class PermissionServiceImpl implements PermissionService {
 	 */
 	@Override
 	public void add(Permission permission) {
-		permissionMapper.insert(permission);		
+		permission.setPermissionId(UUIDutil.getUUID());
+		permission.setPermissionCreattime(dateUtil.getDate());
+		permission.setPermissionEdittime(dateUtil.getDate());
+		permissionMapper.insert(permission);
 	}
 
 	
@@ -86,5 +92,10 @@ public class PermissionServiceImpl implements PermissionService {
 		Page<Permission> page=   (Page<Permission>) permissionMapper.selectByExample(permission);
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+	@Override
+	public List<Map> findForSelect2() {
+		return permissionMapper.findForSelect2();
+	}
+
 }

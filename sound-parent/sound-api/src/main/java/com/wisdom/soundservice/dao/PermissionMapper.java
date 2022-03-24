@@ -4,6 +4,8 @@ import com.wisdom.sound.pojo.Permission;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface PermissionMapper {
     int deleteByPrimaryKey(String permissionId);
@@ -21,4 +23,6 @@ public interface PermissionMapper {
     List<Permission> selectByExample(Permission record);
 
     List<Permission> findAll();
+
+    List<Map> findForSelect2();
 }

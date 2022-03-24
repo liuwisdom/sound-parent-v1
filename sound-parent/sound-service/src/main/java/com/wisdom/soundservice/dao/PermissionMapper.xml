@@ -30,6 +30,12 @@
     <include refid="Base_Column_List" />
     from permission
   </select>
+  <!--初始化父级权限下拉列表-->
+  <select id="findForSelect2"  resultType="java.util.Map">
+    select
+    permission_id as id ,permission_name as text
+    from permission
+  </select>
   <select id="selectByExample" parameterType="com.wisdom.sound.pojo.Permission" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

@@ -139,7 +139,7 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="permission in permissionList">
-                        <td><input  type="checkbox" ng-click="updateSelection($event,resource.resourceId)"/></td>
+                        <td><input  type="checkbox" ng-click="updateSelection($event,permission.permissionId)"/></td>
                         <td>{{permission.permissionName}}</td>
                         <td>{{resource.permissionCode}}</td>
                         <td>{{jsonToString(permission.permissionParentid,'text')}}</td>
@@ -155,7 +155,7 @@
                 <!--数据列表/-->
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="saveResource()">保存</button>
+                <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="savePermission()">保存</button>
                 <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
             </div>
         </div>

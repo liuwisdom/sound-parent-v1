@@ -1,5 +1,6 @@
 package com.wisdom.soundweb.controller;
 import java.util.List;
+import java.util.Map;
 
 import com.wisdom.sound.entity.PageResult;
 import com.wisdom.sound.entity.Result;
@@ -8,6 +9,7 @@ import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.dubbo.config.annotation.Reference;
 
@@ -35,8 +37,18 @@ public class PermissionController {
 	 * @return
 	 */
 	@RequestMapping("/findAll")
+	@ResponseBody
 	public List<Permission> findAll(){
 		return permissionService.findAll();
+	}
+	/**
+	 * 初始化父级去权限多选列表
+	 * @return
+	 */
+	@RequestMapping("/findForSelect2")
+	@ResponseBody
+	public List<Map> findForSelect2(){
+		return permissionService.findForSelect2();
 	}
 	
 	
@@ -45,6 +57,7 @@ public class PermissionController {
 	 * @return
 	 */
 	@RequestMapping("/findPage")
+	@ResponseBody
 	public PageResult findPage(int page, int rows){
 		return permissionService.findPage(page, rows);
 	}
@@ -55,6 +68,7 @@ public class PermissionController {
 	 * @return
 	 */
 	@RequestMapping("/add")
+	@ResponseBody
 	public Result add(@RequestBody Permission permission){
 		try {
 			permissionService.add(permission);
@@ -71,6 +85,7 @@ public class PermissionController {
 	 * @return
 	 */
 	@RequestMapping("/update")
+	@ResponseBody
 	public Result update(@RequestBody Permission permission){
 		try {
 			permissionService.update(permission);
@@ -87,6 +102,7 @@ public class PermissionController {
 	 * @return
 	 */
 	@RequestMapping("/findOne")
+	@ResponseBody
 	public Permission findOne(String  id){
 		return permissionService.findOne(id);		
 	}
@@ -97,6 +113,7 @@ public class PermissionController {
 	 * @return
 	 */
 	@RequestMapping("/delete")
+	@ResponseBody
 	public Result delete(String [] ids){
 		try {
 			permissionService.delete(ids);
@@ -115,6 +132,7 @@ public class PermissionController {
 	 * @return
 	 */
 	@RequestMapping("/search")
+	@ResponseBody
 	public PageResult search(@RequestBody Permission permission, int page, int rows  ){
 		return permissionService.findPage(permission, page, rows);		
 	}

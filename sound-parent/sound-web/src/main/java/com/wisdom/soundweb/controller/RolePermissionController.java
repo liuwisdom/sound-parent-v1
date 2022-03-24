@@ -28,8 +28,8 @@ public class RolePermissionController {
     private RoleService roleService;
 
     @RequestMapping("/torolepermission")
-    public  String torolegroup(){
-        return "role-permission";
+    public  String torolepermission(){
+        return "/admin/role-permission";
     }
 
     @ResponseBody
